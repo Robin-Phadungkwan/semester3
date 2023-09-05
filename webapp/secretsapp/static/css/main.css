@@ -8,3 +8,11 @@ body {
     margin: 1em auto;
     background-color: #abc;
 }
+nav{
+    display: block;
+}
+#sitenavigatie{
+    display:inline;
+    border:1px none;
+    float: center;
+}
