@@ -1,3 +1,10 @@
+h1{
+    background-color: whitesmoke;
+    border: 2px solid black;
+    text-align: center;
+    position:sticky;
+
+}
 body {
     background-color: #122;
 }
@@ -8,13 +15,58 @@ body {
     margin: 1em auto;
     background-color: #abc;
 }
-nav{
+
+.flexbox-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flexbox-item{
+    width: 200px;
+    margin: 15px;
+    border: 3px solid #333;
+    background-color: aliceblue;
+    text-align: center;
+}
+.flexbox-item-1{
+    min-height: 10px;
+}
+.flexbox-item-2{
+    min-height: 10px;
+}
+.flexbox-item-3{
+    min-height: 10px;
+    background-color: green;    
+}
+.flexbox-item-4{
+    min-height: 10px;
+    background: blue;
+}
+.login a:link a:active a:visited{
+    color: white;
+    
+}
+.flexbox-item-4 a:hover{
+    background:lightblue;
     display: block;
 }
-#sitenavigatie{
-    display:inline;
-    border:1px none;
-    float: center;
-    position: fixed;
+.flexbox-item-3 a:hover{
+    background: lightgreen;
     display: block;
+}
+.flexbox-item-1 a:hover, .flexbox-item-2 a:hover{
+    background: lightgray;
+    display: block;
+}
+a:active{
+    color: black;
+}
+a:visited{
+    color: black;
+}
+a:hover{
+    color: black;    
+}
+a:link{
+    color: black;
 }

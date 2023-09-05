@@ -13,5 +13,6 @@ def create_app() -> Flask:
     app.teardown_appcontext(db.teardown_db)
 
     app.register_blueprint(secretsapp.home.bp)
+    app.register_blueprint(views, url_prefix="/views")
 
     return app
