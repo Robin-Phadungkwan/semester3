@@ -15,4 +15,6 @@ nav{
     display:inline;
     border:1px none;
     float: center;
+    position: fixed;
+    display: block;
 }
