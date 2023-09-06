@@ -1,27 +1,14 @@
 {% extends "base.html" %} {% block title %}login{% endblock %} {% block
     content %}
-    <form method="POST">
-      <h3 align="center">login</h3>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          placeholder="Enter email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password1">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          placeholder="Enter password"
-      </div>
-      <br />
-      <button type="submit" class="btn btn-primary">login</button>
-    </form>
+    <body>
+        <div class="flexbox-container">
+            <a href="/"><div class="flexbox-item flexbox-item-1">home</a></div>
+            <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
+            <div class="flexbox-item flexbox-item-3"><a href="/sign-up/">register</a></div>
+            <div class="flexbox-item flexbox-item-4"><a class="login" href="/login/">login</a></div>
+            <div class="axis main-axis"></div>
+            <div class="axis cross-axis"></div>
+        </div>
+    </body>
+    <h1>Secret Manager</h1>
     {% endblock %}
