@@ -36,11 +36,12 @@ body {
 }
 .flexbox-item-3{
     min-height: 10px;
-    background-color: green;    
+    background-color: rgb(0, 255, 0);    
 }
 .flexbox-item-4{
     min-height: 10px;
-    background: blue;
+    background: rgb(0, 191, 255);
+    color: white;
 }
 .login a:link a:active a:visited{
     color: white;
