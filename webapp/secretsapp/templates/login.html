@@ -1,6 +1,7 @@
 {% extends "base.html" %} {% block title %}login{% endblock %} {% block
     content %}
     <body>
+      
         <div class="flexbox-container">
             <a href="/"><div class="flexbox-item flexbox-item-1">home</a></div>
             <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
@@ -9,6 +10,28 @@
             <div class="axis main-axis"></div>
             <div class="axis cross-axis"></div>
         </div>
+        <h1>Secret Manager</h1>
+        <body class="login-page">
+          <div class="flexbox-item-5">
+            <form action="">
+              <h1>Login</h1>
+              <div class="input-box">
+                <input type="text" placeholder="Username" required>
+              </div>
+              <div class="input-box">
+                <input type="password" placeholder="Password" required>
+              </div>
+              <div class="remember-forgot">
+                <label><input type="checkbox">Rememeber me</label>
+                <a href="#">Forgot password ?</a>
+              </div>
+                <button type="submit" class="btn">login</button>
+              <div class="register-link">
+                <p>Don't have an account? <a href="/sign-up/">sign up</a></p>
+              </div>
+            </form>
+        </div>
+        </body>
     </body>
-    <h1>Secret Manager</h1>
+    
     {% endblock %}
