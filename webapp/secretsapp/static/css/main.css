@@ -8,9 +8,16 @@ h1{
     position:sticky;
 
 }
+img.logo{
+    width: auto;
+    height: 50px; 
+}
+.about-text{
+    text-align: center;
+}
 body {
     background-color: red yellow;
-    background: url(../matrix.gif);
+    background: url(../images/matrix.gif);
 
 }
 
