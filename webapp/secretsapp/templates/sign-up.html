@@ -1,46 +1,42 @@
 {% extends "base.html" %} {% block title %}register{% endblock %} {% block
-content %}
-
-<body class="flexbox">
-    <div class="flexbox-container">
-        <a href="/">
-            <div class="flexbox-item flexbox-item-1">home
-        </a>
-    </div>
-    <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
-    <div class="flexbox-item flexbox-item-3"><a href="/sign-up/">register</a></div>
-    <div class="flexbox-item flexbox-item-4"><a class="login" href="/login/">login</a></div>
-    <div class="axis main-axis"></div>
-    <div class="axis cross-axis"></div>
-    </div>
-</body>
-<body>
-    <h1> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b><marquee>Secret Manager</marquee> </b></i></h1></h1>
-
-    <body class="login-page">
-        <div class="flexbox-item-5">
-            <form action="">
-                <h1>Sign Up</h1>
-                <div class="input-box">
-                    <input type="text" placeholder="Username" required>
-                </div>
-                <div class="input-box">
-                    <input type="email" placeholder="email adress" required>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <div class="remember-forgot">
-                    <label><input type="checkbox" required>i agree to the terms</label>
-                    <!--<a href="#">Forgot password ?</a>-->
-                </div>
-                <button type="submit" class="btn">register</button>
-                <div class="register-link">
-                    <p>have a account? <a href="/login/">login</a></p>
-                </div>
-            </form>
+    content %}
+    
+    <body class="flexbox">
+        <div class="flexbox-container">
+            <div class="flexbox-item flexbox-item-1"><a href="/">home</a></div>
+            <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
+            <div class="flexbox-item-6"><h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b><marquee>Secret Manager</marquee> </b></i></h2></div>
+            <div class="flexbox-item flexbox-item-3"><a href="/sign-up/">register</a></div>
+            <div class="flexbox-item flexbox-item-4"><a class="login" href="/login/">login</a></div>
+            <div class="axis main-axis"></div>
+            <div class="axis cross-axis"></div>
         </div>
     </body>
-</body>
-<p class="copyright">&copy; Robin P</p>
-{% endblock %}
+    <body>
+        <body class="login-page">
+            <div class="flexbox-item-5">
+                <form action="">
+                    <h1>Sign Up</h1>
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" placeholder="email adress" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox" required>i agree to the terms</label>
+                        <!--<a href="#">Forgot password ?</a>-->
+                    </div>
+                    <button type="submit" class="btn">register</button>
+                    <div class="register-link">
+                        <p>have a account? <a href="/login/">login</a></p>
+                    </div>
+                </form>
+            </div>
+        </body>
+    </body>
+    <p class="copyright">&copy; Robin P</p>
+    {% endblock %}
