@@ -3,7 +3,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
-h1{
+h2{
     background-color: whitesmoke;
     border: 2px solid black;
     text-align: center;
@@ -52,7 +52,7 @@ body {
     text-align: center;
 }
 /*maakt dat flexbox item 1 en 2 een minimale hoogte heeft van 10 pixels*/
-.flexbox-item-1, .flexbox-item-2{
+.flexbox-item-1, .flexbox-item-2 .flexbox-item-6{
     min-height: 10px;
 }
 /*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
