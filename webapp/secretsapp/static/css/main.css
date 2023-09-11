@@ -1,38 +1,48 @@
+/*maakt dat alle text arial font heeft*/
 *{
     font-family: Arial, Helvetica, sans-serif;
 }
+/*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h1{
     background-color: whitesmoke;
     border: 2px solid black;
     text-align: center;
-    position:sticky;
-
+    position: sticky;
+    align-self: flex-start;
+    top: 40px;
 }
+/*het logo van de secret manager 50 px hoog maken zodat hij in de border past*/
 img.logo{
     width: auto;
     height: 50px; 
 }
+/* maakt dat alle text van de class about-text in het midden staat*/
 .about-text{
     text-align: center;
 }
+/*maakt de achtergrond de matrix rain en als die er niet is dan wordt het rood en geel*/
 body {
     background-color: red yellow;
     background: url(../images/matrix.gif);
-
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
 .content {
     max-width: 1000px;
     min-height: 97vh;
     margin: 1em auto;
     background-color: #abc;
 }
-
+/*maakt van alle flexbox een flex item en zet alle text in het midden en maakt dat alle flexboxes center worden gezet */
 .flexbox-container{
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: flex-start;
+    position: sticky;
+    top: 0px;
 }
+/*maakt dat de wijde 200 pixels is en de margin 15 pixels is, verder is de border van flexbox item 3px dik en een solid line en krijgt de kleur #333. achtergrond kleur is alice blue en wordt de text in het midden gezet*/
 .flexbox-item{
     width: 200px;
     margin: 15px;
@@ -40,21 +50,22 @@ body {
     background-color: aliceblue;
     text-align: center;
 }
-.flexbox-item-1{
+/*maakt dat flexbox item 1 en 2 een minimale hoogte heeft van 10 pixels*/
+.flexbox-item-1, .flexbox-item-2{
     min-height: 10px;
 }
-.flexbox-item-2{
-    min-height: 10px;
-}
+/*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
 .flexbox-item-3{
     min-height: 10px;
     background-color: rgb(0, 255, 0);    
 }
+/*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van blauw krijgt en een text kleur van wit krijgt*/
 .flexbox-item-4{
     min-height: 10px;
     background: rgb(0, 191, 255);
     color: white;
 }
+/**/
 .login a:link a:active a:visited{
     color: white;
     
