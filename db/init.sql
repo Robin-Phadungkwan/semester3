@@ -15,11 +15,11 @@ CREATE TABLE Secret (
     FOREIGN KEY (user_name) REFERENCES User(username)
 );
 
-START TRANSACTIOn;
+START TRANSACTION;
 
 INSERT INTO User (username, password_hash) VALUES ("admin", "$argon2id$v=19$m=65536,t=3,p=4$S8qw3tIZL42JCd7dXxb8Sg$RGKdpN66YUNd4z9iFxaNZrYHdhCIwMf7D7DB96yUlBM");
 
 INSERT INTO Secret (name, info, user_name) VALUES ("Test", "Test", "admin");
-INSERT INTO Secret (name, info, user_name) VALUES ("Foo", "Bar", "admin")
+INSERT INTO Secret (name, info, user_name) VALUES ("Foo", "Bar", "admin");
 
 COMMIT;
