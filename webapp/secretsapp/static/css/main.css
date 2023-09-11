@@ -27,6 +27,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+/*maakt de content de hoogte van 1000 pixels en een minale hoogte van 97vp (viewport height), het heeft een margin van 1 element size en heeft een percentage die automaties wordt berekent en heeft een achtergrond kleur van #abc*/
 .content {
     max-width: 1000px;
     min-height: 97vh;
@@ -65,43 +66,29 @@ body {
     background: rgb(0, 191, 255);
     color: white;
 }
-/**/
-.login a:link a:active a:visited{
-    color: white;
-    
-}
+/*maakt de login knop als er met de muis erover wordt gezweefd lichtblauw*/
 .flexbox-item-4 a:hover{
     background:lightblue;
     display: block;
 }
+/*maakt de register knop als er met de muis erover wordt gezweefd lichtgroen */
 .flexbox-item-3 a:hover{
     background: lightgreen;
     display: block;
 }
+/*maakt de knoppen als er met de muis erover wordt gezweefd lichtgrijs*/
 .flexbox-item-1 a:hover, .flexbox-item-2 a:hover{
     background: lightgray;
     display: block;
 }
-a:active{
+/*maakt de text kleur zwart met geen text decoratie*/
+a:active, a:visited, a:link, a:hover{
     color: black;
     text-decoration: none;    
 }
-a:visited{
-    color: black;
-    text-decoration: none;
-}
-a:hover{
-    color: black;
-    text-decoration: none;
-}
-a:link{
-    color: black;
-    text-decoration: none;
-}
+/*login en register pagina setup met de kleuren en doorgeven wat voor soort container het is, verder important toegevoegd om het extra speciaal te maken en de login in het midden zetten*/
 .flexbox-item-5 {
     display: flexbox;
-    /*  */
-    /*width: 500px;*/
     background: transparent;
     border: 2px solid rgba(255,255,255,.2);
     backdrop-filter: blur(20px);
@@ -110,20 +97,21 @@ a:link{
     align-items: center;
     border-radius: 10px;
     padding: 30px 40px;
-    /* Add this property to prevent content overflow */
 }
+/*font size naar 40 pixels gezet, verder text in het midden gezet geen border en achtergrondkleur moet het zelfde zijn als dat achter hem*/
 .flexbox-item-5 h1{
     font-size: 40px;
     text-align: center;
     border: none;
-    background-color: inherit;
-    
+    background-color: inherit; 
 }
+/*maakt de breedte 99 procent van het totale en de hoogte is 70 pixels, hij heeft een margin van 30pixels met geen percentage*/
 .flexbox-item-5 .input-box{
     width: 99%;
     height: 70px;
     margin: 30px 0;
 }
+/*maakt de breedte en lengte 100 procent, de achtergrond transparant, geen borders, geen outline, border is 2 pixels solide en kleur 255,255,255, .2. border radius is 40 pixels, font size is 16 pixels, de text is wit en staat in het midden */
 .input-box input{
     width: 100%;
     height: 100%;
@@ -136,11 +124,12 @@ a:link{
     color: #fff;
     text-align: center;
 }
+/*maakt de placeholder text wit*/
 .input-box input::placeholder {
     color: #fff;
 
 }
-
+/*maakt de remember forget een flex container, de content is space between en is belangrijk, de text staat in het midden en de font size is 15 pixels*/
 .flexbox-item-5 .remember-forgot{
     display:flex;
     justify-content: space-between !important;
@@ -148,19 +137,21 @@ a:link{
     font-size: 15px;
     margin: -15px 0 15px;
 }
-
+ /*maakt de accent kleur wit, de margin is rechts 7 pixels */
 .remember-forgot label input {
     accent-color: white;
     margin-right: 7px;
 }
-
+/*maakt de remember forget wit met geen text decoratie*/
 .remember-forgot a{
     color: #fff;
     text-decoration: none;
 }
+/*maakt de text decoratie een underline*/
 .remember-forgot a:hover {
     text-decoration: underline;
 }
+/*maakt de button groot genoeg dat het mooi is op de website, en maakt van je muis een pointer als je erovereen zweeft*/
 .flexbox-item-5 .btn {
     width: 100%;
     height: 50px;
@@ -174,25 +165,23 @@ a:link{
     color: #333;
     font-weight: 600;
 }
+/*zet de text van de register knop in het midden*/
 .flexbox-item-5 .register-link{
     font-size: 14,5 px;
     text-align: center;
     margin-top: 30px 0 15px;
 }
+/*maakt de register link zwart met geen text decoratie en het font gewicht is 600*/
 .register-link p a {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
 }
+/*geeft de register link een underline als je eroverheen zweeft*/
 .register-link p a:hover{
     text-decoration: underline;
 }
+/*zet de copyright in het midden*/
 p.copyright{
     text-align: center;
-}
-.flexbox-item-5 .agree label input{
-    accent-color: white;
-    position: sticky;
-    margin-right:5px;
-    float: left;
 }
