@@ -14,16 +14,24 @@ h2{
 /*het logo van de secret manager 50 px hoog maken zodat hij in de border past*/
 img.logo{
     width: auto;
-    height: 50px; 
+    height: 40px; 
 }
 /* maakt dat alle text van de class about-text in het midden staat*/
 .about-text{
     text-align: center;
 }
+/*zet de text in het midden*/
+h1{
+    text-align: center;
+}
+/*zet de tekst in het midden*/
+p{
+    text-align: center;
+}
 /*maakt de achtergrond de matrix rain en als die er niet is dan wordt het rood en geel*/
 body {
     background-color: red yellow;
-    background: url(../images/matrix.gif);
+    background: url(../images/matrix-good-loop.gif);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -32,7 +40,8 @@ body {
     max-width: 1000px;
     min-height: 97vh;
     margin: 1em auto;
-    background-color: #abc;
+    background-color: whitesmoke;
+    opacity: 0.95;
 }
 /*maakt van alle flexbox een flex item en zet alle text in het midden en maakt dat alle flexboxes center worden gezet */
 .flexbox-container{
@@ -48,12 +57,12 @@ body {
     width: 200px;
     margin: 15px;
     border: 3px solid #333;
-    background-color: aliceblue;
+    background-color: whitesmoke;
     text-align: center;
 }
 /*maakt dat flexbox item 1 en 2 een minimale hoogte heeft van 10 pixels*/
 .flexbox-item-1, .flexbox-item-2 .flexbox-item-6{
-    min-height: 10px;
+    min-height: 15px;
 }
 /*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
 .flexbox-item-3{
