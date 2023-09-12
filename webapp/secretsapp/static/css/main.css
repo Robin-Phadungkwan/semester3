@@ -10,11 +10,12 @@ h2{
     position: sticky;
     align-self: flex-start;
     top: 40px;
+    font-size: clamp(3vh, 2rem, -1vh); /*min,val,max*/
 }
 /*het logo van de secret manager 50 px hoog maken zodat hij in de border past*/
 img.logo{
-    width: auto;
-    height: 40px; 
+    width: 40px;
+    height: inherit;
 }
 /* maakt dat alle text van de class about-text in het midden staat*/
 .about-text{
@@ -23,10 +24,12 @@ img.logo{
 /*zet de text in het midden*/
 h1{
     text-align: center;
+    font-size: clamp(4vh, 2rem, -1vh); /*min,val,max*/
 }
 /*zet de tekst in het midden*/
 p{
     text-align: center;
+    font-size:  clamp(2vh, 2rem, -1vh); /*min,val,max*/
 }
 /*maakt de achtergrond de matrix rain en als die er niet is dan wordt het rood en geel*/
 body {
@@ -51,6 +54,7 @@ body {
     align-self: flex-start;
     position: sticky;
     top: 0px;
+    font-size: clamp(2vh, 2rem, -1vh); /*min,val,max*/
 }
 /*maakt dat de wijde 200 pixels is en de margin 15 pixels is, verder is de border van flexbox item 3px dik en een solid line en krijgt de kleur #333. achtergrond kleur is alice blue en wordt de text in het midden gezet*/
 .flexbox-item{
@@ -100,8 +104,8 @@ a:active, a:visited, a:link, a:hover{
     display: flexbox;
     background: transparent;
     border: 2px solid rgba(255,255,255,.2);
-    backdrop-filter: blur(20px);
-    color: #fff;
+    backdrop-filter: blur(60px);
+    color: black;
     justify-content:center !important;
     align-items: center;
     border-radius: 10px;
@@ -119,6 +123,7 @@ a:active, a:visited, a:link, a:hover{
     width: 99%;
     height: 70px;
     margin: 30px 0;
+    font-size: clamp(3vh, 2rem, -1vh); /*min,val,max*/
 }
 /*maakt de breedte en lengte 100 procent, de achtergrond transparant, geen borders, geen outline, border is 2 pixels solide en kleur 255,255,255, .2. border radius is 40 pixels, font size is 16 pixels, de text is wit en staat in het midden */
 .input-box input{
@@ -127,15 +132,16 @@ a:active, a:visited, a:link, a:hover{
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255,255,255, .2);
+    border: 2px solid black;
     border-radius: 40px;
     font-size: 16px;
-    color: #fff;
+    color: black;
     text-align: center;
+    font-size: clamp(2vh, 2rem, -5vh); /*min,val,max*/
 }
 /*maakt de placeholder text wit*/
 .input-box input::placeholder {
-    color: #fff;
+    color: black;
 
 }
 /*maakt de remember forget een flex container, de content is space between en is belangrijk, de text staat in het midden en de font size is 15 pixels*/
@@ -145,15 +151,20 @@ a:active, a:visited, a:link, a:hover{
     text-align: center;
     font-size: 15px;
     margin: -15px 0 15px;
+    font-size: clamp(2vh, 2rem, -1vh); /*min,val,max*/
 }
  /*maakt de accent kleur wit, de margin is rechts 7 pixels */
 .remember-forgot label input {
-    accent-color: white;
+    accent-color: black;
     margin-right: 7px;
+}
+input.checkbox-big{
+    width: clamp(2.5vh, 2rem, -1vh); /*min,val,max*/
+    height: clamp(2.5vh, 2rem, -1vh); /*min,val,max*/
 }
 /*maakt de remember forget wit met geen text decoratie*/
 .remember-forgot a{
-    color: #fff;
+    color: black;
     text-decoration: none;
 }
 /*maakt de text decoratie een underline*/
@@ -163,16 +174,17 @@ a:active, a:visited, a:link, a:hover{
 /*maakt de button groot genoeg dat het mooi is op de website, en maakt van je muis een pointer als je erovereen zweeft*/
 .flexbox-item-5 .btn {
     width: 100%;
-    height: 50px;
-    background: #fff;
+    height: 90px;
+    background: black;
     border: none;
     outline: none;
     border-radius: 30 px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
     cursor: pointer;
     font-size: 16px;
-    color: #333;
+    color: white;
     font-weight: 600;
+    font-size: clamp(3vh, 2rem, -1vh); /*min,val,max*/
 }
 /*zet de text van de register knop in het midden*/
 .flexbox-item-5 .register-link{
@@ -182,7 +194,7 @@ a:active, a:visited, a:link, a:hover{
 }
 /*maakt de register link zwart met geen text decoratie en het font gewicht is 600*/
 .register-link p a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     font-weight: 600;
 }
