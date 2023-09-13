@@ -10,7 +10,6 @@ h2{
     position: sticky;
     align-self: flex-start;
     top: 40px;
-    font-size: clamp(3vh, 2rem, -1vh); /*min,val,max*/
 }
 /*het logo van de secret manager 50 px hoog maken zodat hij in de border past*/
 img.logo{
@@ -24,19 +23,17 @@ img.logo{
 /*zet de text in het midden*/
 h1{
     text-align: center;
-    font-size: clamp(4vh, 2rem, -1vh); /*min,val,max*/
 }
 /*zet de tekst in het midden*/
 p{
     text-align: center;
-    font-size:  clamp(2vh, 2rem, -1vh); /*min,val,max*/
+   /* font-size:  clamp(2vh, 2rem, -1vh); /*min,val,max*/
 }
-/*maakt de achtergrond de matrix rain en als die er niet is dan wordt het rood en geel*/
+/*maakt de achtergrond de matrix rain*/
 body {
-    background-color: red yellow;
     background: url(../images/matrix-good-loop.gif);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; /*cover is dat het de hele pagina bedekt wordt of het element*/
 }
 /*maakt de content de hoogte van 1000 pixels en een minale hoogte van 97vp (viewport height), het heeft een margin van 1 element size en heeft een percentage die automaties wordt berekent en heeft een achtergrond kleur van #abc*/
 .content {
@@ -54,7 +51,6 @@ body {
     align-self: flex-start;
     position: sticky;
     top: 0px;
-    font-size: clamp(2vh, 2rem, -1vh); /*min,val,max*/
 }
 /*maakt dat de wijde 200 pixels is en de margin 15 pixels is, verder is de border van flexbox item 3px dik en een solid line en krijgt de kleur #333. achtergrond kleur is alice blue en wordt de text in het midden gezet*/
 .flexbox-item{
@@ -106,7 +102,7 @@ a:active, a:visited, a:link, a:hover{
     border: 2px solid rgba(255,255,255,.2);
     backdrop-filter: blur(60px);
     color: black;
-    justify-content:center !important;
+    justify-content:center;
     align-items: center;
     border-radius: 10px;
     padding: 30px 40px;
@@ -123,7 +119,7 @@ a:active, a:visited, a:link, a:hover{
     width: 99%;
     height: 70px;
     margin: 30px 0;
-    font-size: clamp(3vh, 2rem, -1vh); /*min,val,max*/
+    
 }
 /*maakt de breedte en lengte 100 procent, de achtergrond transparant, geen borders, geen outline, border is 2 pixels solide en kleur 255,255,255, .2. border radius is 40 pixels, font size is 16 pixels, de text is wit en staat in het midden */
 .input-box input{
@@ -137,21 +133,18 @@ a:active, a:visited, a:link, a:hover{
     font-size: 16px;
     color: black;
     text-align: center;
-    font-size: clamp(2vh, 2rem, -5vh); /*min,val,max*/
 }
 /*maakt de placeholder text wit*/
 .input-box input::placeholder {
     color: black;
-
 }
 /*maakt de remember forget een flex container, de content is space between en is belangrijk, de text staat in het midden en de font size is 15 pixels*/
 .flexbox-item-5 .remember-forgot{
     display:flex;
-    justify-content: space-between !important;
+    justify-content: space-between;
     text-align: center;
     font-size: 15px;
     margin: -15px 0 15px;
-    font-size: clamp(2vh, 2rem, -1vh); /*min,val,max*/
 }
  /*maakt de accent kleur wit, de margin is rechts 7 pixels */
 .remember-forgot label input {
@@ -184,7 +177,7 @@ input.checkbox-big{
     font-size: 16px;
     color: white;
     font-weight: 600;
-    font-size: clamp(3vh, 2rem, -1vh); /*min,val,max*/
+   
 }
 /*zet de text van de register knop in het midden*/
 .flexbox-item-5 .register-link{
@@ -206,3 +199,22 @@ input.checkbox-big{
 p.copyright{
     text-align: center;
 }
+
+@media all and (max-width: 480px) {
+    .flexbox-container{
+        flex-direction: column;
+        background-color: #DCAE96;
+    }
+    
+    .flexbox-item{
+        list-style-type: none;
+        width: 98%;
+        text-align: center;
+        padding-top: 2px;
+        margin-bottom: 2px;
+        border: 2px solid #DCAE96;
+        background-color: #DCAE96;  
+        border-bottom: 2px solid black;
+    }
+}
+    
