@@ -1,14 +1,12 @@
 import secrets
-
 from flask import Flask
 import secretsapp.home
 import secretsapp.db as db
 
+
 def create_app() -> Flask:
     app = Flask(__name__)
-    from .views import views
-    from .auth import auth
-    from .about import about
+    from .home import views,auth,about
     app.config["SECRET_KEY"] = secrets.token_hex(64)
 
     app.teardown_appcontext(db.teardown_db)
