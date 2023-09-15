@@ -4,8 +4,8 @@
 }
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h2{
-    background-color: whitesmoke;
-    border: 2px solid black;
+    background-color: inherit;
+    border: 2px solid inherit;
     text-align: center;
     position: sticky;
     align-self: flex-start;
@@ -51,13 +51,14 @@ body {
     align-self: flex-start;
     position: sticky;
     top: 0px;
+    background-color: #DCAE96;
 }
 /*maakt dat de wijde 200 pixels is en de margin 15 pixels is, verder is de border van flexbox item 3px dik en een solid line en krijgt de kleur #333. achtergrond kleur is alice blue en wordt de text in het midden gezet*/
 .flexbox-item{
     width: 200px;
     margin: 15px;
-    border: 3px solid #333;
-    background-color: whitesmoke;
+    border: 3px solid inherit;
+    background-color: inherit;
     text-align: center;
 }
 /*maakt dat flexbox item 1 en 2 een minimale hoogte heeft van 10 pixels*/
