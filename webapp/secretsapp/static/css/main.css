@@ -50,7 +50,7 @@ body {
     align-self: flex-start;
     position: sticky;
     top: 0px;
-    background-color: #DCAE96;
+    background-color:  #800000;
 }
 /*maakt dat de wijde 200 pixels is en de margin 15 pixels is, verder is de border van flexbox item 3px dik en een solid line en krijgt de kleur #333. achtergrond kleur is alice blue en wordt de text in het midden gezet*/
 .flexbox-item{
@@ -204,7 +204,7 @@ p.copyright{
 @media all and (max-width: 480px) {
     .flexbox-container{
         flex-direction: column;
-        background-color: #DCAE96;
+        background-color:  #800000;
     }
     
     .flexbox-item{
@@ -213,8 +213,8 @@ p.copyright{
         text-align: center;
         padding-top: 2px;
         margin-bottom: 2px;
-        border: 2px solid #DCAE96;
-        background-color: #DCAE96;  
+        border: 2px solid  #800000;
+        background-color:  #800000;  
         border-bottom: 2px solid black;
     }
 }
