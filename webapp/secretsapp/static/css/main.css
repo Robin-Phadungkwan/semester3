@@ -4,7 +4,7 @@
 }
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h2{
-    background-color: inherit
+    background-color: inherit;
     text-align: center;
     position: sticky;
     align-self: flex-start;
