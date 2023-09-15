@@ -4,8 +4,7 @@
 }
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h2{
-    background-color: inherit;
-    border: 2px solid inherit;
+    background-color: inherit
     text-align: center;
     position: sticky;
     align-self: flex-start;
@@ -65,6 +64,7 @@ body {
 .flexbox-item-1, .flexbox-item-2 .flexbox-item-6{
     min-height: 15px;
 }
+
 /*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
 .flexbox-item-3{
     min-height: 10px;
