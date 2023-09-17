@@ -50,7 +50,7 @@ body {
     align-self: flex-start;
     position: sticky;
     top: 0px;
-    background-color:  #800000;
+    background-color: #d4380b
 }
 /*maakt dat de wijde 200 pixels is en de margin 15 pixels is, verder is de border van flexbox item 3px dik en een solid line en krijgt de kleur #333. achtergrond kleur is alice blue en wordt de text in het midden gezet*/
 .flexbox-item{
