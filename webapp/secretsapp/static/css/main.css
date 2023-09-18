@@ -204,7 +204,7 @@ p.copyright{
 @media all and (max-width: 480px) {
     .flexbox-container{
         flex-direction: column;
-        background-color:  #800000;
+        background-color:  #d4380b;
     }
     
     .flexbox-item{
@@ -213,8 +213,8 @@ p.copyright{
         text-align: center;
         padding-top: 2px;
         margin-bottom: 2px;
-        border: 2px solid  #800000;
-        background-color:  #800000;  
+        border: 2px solid  #d4380b;
+        background-color:  #d4380b;  
         border-bottom: 2px solid black;
     }
 }

@@ -12,8 +12,8 @@ def create_app() -> Flask:
     app.teardown_appcontext(db.teardown_db)
     #hieronder wordt de blueprint geregistreerd.
     app.register_blueprint(secretsapp.home.bp)
-    app.register_blueprint(views, url_prefix="/sign-up/")
-    app.register_blueprint(auth, url_prefix="/login/" )
+    app.register_blueprint(views, url_prefix="/register/")
+    app.register_blueprint(auth, url_prefix="/login/")
     app.register_blueprint(about, url_prefix="/about/")
     app.register_blueprint(loggedin, url_prefix="/logged-in/")
     return app
