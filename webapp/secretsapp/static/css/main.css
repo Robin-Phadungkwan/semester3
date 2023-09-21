@@ -116,7 +116,7 @@ a:active, a:visited, a:link, a:hover{
     background-color: inherit; 
 }
 /*maakt de breedte 99 procent van het totale en de hoogte is 70 pixels, hij heeft een margin van 30pixels met geen percentage*/
-.flexbox-item-5 .input-box{
+.flexbox-item-5 .input-box, .input-box{
     width: 99%;
     height: 70px;
     margin: 30px 0;
@@ -166,7 +166,7 @@ input.checkbox-big{
     text-decoration: underline;
 }
 /*maakt de button groot genoeg dat het mooi is op de website, en maakt van je muis een pointer als je erovereen zweeft*/
-.flexbox-item-5 .btn {
+.flexbox-item-5 .btn, .btn {
     width: 100%;
     height: 90px;
     background: black;

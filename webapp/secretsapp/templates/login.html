@@ -7,7 +7,13 @@ content %}
       </div>
       <div class="flexbox-item flexbox-item-1"><a href="/">home</a></div>
       <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
-      <div class="flexbox-item flexbox-item-3"><a href="/register/">register</a></div>
+      <div class="flexbox-item flexbox-item-3"> <p>
+        {% if username %}
+        {{ username }}
+        {% else %}
+        user
+        {% endif %}
+        </p></div>
       <div class="flexbox-item flexbox-item-4"><a class="login" href="/login/">login</a></div>
       <div class="axis main-axis"></div>
       <div class="axis cross-axis"></div>
@@ -18,19 +24,19 @@ content %}
 
   <body action="/login/" method="POST" class="login-page">
     <div class="flexbox-item-5">
-      <form action="">
+      <form method="post">
         <h1>Login</h1>
         <div class="input-box">
-          <input type="username" placeholder="Username" required>
+          <input type="username" name="username" placeholder="Username" required>
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Password" required>
+          <input type="password" name="password" placeholder="Password" required>
         </div>
         <div class="remember-forgot">
           <label><input type="checkbox" class="checkbox-big">Rememeber me</label>
           <a href="#">Forgot password ?</a>
         </div>
-        <button type="submit" onclick="alert('you logged in')" class="btn">login</button>
+        <button type="submit" class="btn">login</button>
         <div class="register-link">
           <p>Don't have an account? <a href="/sign-up/">sign up</a></p>
         </div>
