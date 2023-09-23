@@ -2,7 +2,20 @@
 import functools
 from flask import Flask, Blueprint,render_template, request,session,url_for,redirect
 from werkzeug.security import check_password_hash, generate_password_hash
+import mysql.connector
 
+mydb = mysql.connector.connect(
+    host="secrets-db",
+    user="secrets",
+    password="BestPassword",
+    database="secrets"
+)
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO users (username, password_hash) VALUES (%s, %s)"
+val = (request.form['username'],request.form['password'])
+mycursor.execute(sql, val)
+mydb.commit()
 
 app = Flask(__name__)
 #hier worden de blueprints gemaakt.
@@ -42,3 +55,4 @@ def loggedin():
 @bp.route("/")
 def index():
     return render_template("home/index.html")
+
