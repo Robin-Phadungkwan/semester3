@@ -34,3 +34,15 @@ def insert_user(username, password):
     print ("Record inserted successfully into users table")
     cursor.close()
     db.commit()
+
+def select_user(username, password):
+    db = db_connection()
+    cursor = db.cursor()
+    sql = "SELECT * FROM User WHERE username = %s AND password_hash = %s"
+    val = (username, password)
+    result = cursor.execute(sql, val)
+    db.commit()
+    print(result)
+    print ("Record selected successfully from users table")
+    cursor.close()
+    db.commit()
