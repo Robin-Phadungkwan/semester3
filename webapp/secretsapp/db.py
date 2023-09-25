@@ -22,3 +22,15 @@ def teardown_db(exception):
 
     if db is not None:
         db.close()
+
+def insert_user(username, password):
+    db = db_connection()
+    cursor = db.cursor()
+    sql = "INSERT INTO User (username, password_hash) VALUES (%s, %s)"
+    val = (username, password)
+    result = cursor.execute(sql, val)
+    db.commit()
+    print(result)
+    print ("Record inserted successfully into users table")
+    cursor.close()
+    db.commit()
