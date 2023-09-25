@@ -21,27 +21,23 @@ content %}
 </body>
 <body>
 
-    <body action="/sign-up/" method="POST" class="login-page">
-        <div class="flexbox-item-5">
-            <form action="">
+    <form action="/register/" method="POST" class="login-page flexbox-item-5">
                 <h1>Sign Up</h1>
-                <div class="input-box">
-                    <input type="text" placeholder="Username" required>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <div class="remember-forgot">
+                <p class="input-box">
+                    <input type="text" name="name" placeholder="Username" required>
+                </p>
+                <p class="input-box">
+                    <input type="password" name="passwrd" placeholder="Password" required>
+                </p>
+                <P class="remember-forgot">
                     <label><input type="checkbox" class="checkbox-big" required>i agree to the terms</label>
                     <!--<a href="#">Forgot password ?</a>-->
-                </div>
-                <button type="submit" class="btn">register</button>
+                </P>
+                <input type="button" class="btn" value="register">
                 <div class="register-link">
                     <p>have a account? <a href="/login/">login</a></p>
                 </div>
-            </form>
-        </div>
-    </body>
+    </form>
 </body>
 <p class="copyright">&copy; Robin P</p>
 {% endblock %}
