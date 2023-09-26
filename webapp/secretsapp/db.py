@@ -23,11 +23,11 @@ def teardown_db(exception):
     if db is not None:
         db.close()
 
-def insert_user(username, password):
+def insert_user(username, hashpw):
     db = db_connection()
     cursor = db.cursor()
     sql = "INSERT INTO User (username, password_hash) VALUES (%s, %s)"
-    val = (username, password)
+    val = (username, hashpw)
     result = cursor.execute(sql, val)
     db.commit()
     print(result)
@@ -38,11 +38,18 @@ def insert_user(username, password):
 def select_user(username, password):
     db = db_connection()
     cursor = db.cursor()
-    sql = "SELECT * FROM User WHERE username = %s AND password_hash = %s"
-    val = (username, password)
+    cursor.execute("SELECT * FROM User WHERE username = %s", (username,))
+    myresult = cursor.fetchone()
+    print(myresult)
+
+def insert_secret(secret, username):
+    db = db_connection()
+    cursor = db.cursor()
+    sql = "INSERT INTO Secret (secret, username) VALUES (%s, %s)"
+    val = (secret, username)
     result = cursor.execute(sql, val)
     db.commit()
     print(result)
-    print ("Record selected successfully from users table")
+    print ("Record inserted successfully into secrets table")
     cursor.close()
     db.commit()
