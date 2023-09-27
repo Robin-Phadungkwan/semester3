@@ -17,9 +17,9 @@
         <div class="axis cross-axis"></div> 
     </div>
     <h1> hello {{Username}}</h1>
-    <form action="/logged-in/" method="get" class="login-page flexbox-item-5">
+    <form action="/logged-in/" method="POST" class="login-page flexbox-item-5">
         <p class="input-box">
-            <input type="text" name="geheim" id="geheim" placeholder="enter secrets or passwords here">
+            <input type="text" name="info" id="geheim" placeholder="enter secrets or passwords here">
         </p> 
         <p class="input-box">
             <input type="text" name="name" placeholder="what's it for">
@@ -27,9 +27,7 @@
         <input type="submit" class="btn" value="save">
     </form>
     <td>
-        {% if secrets %}
-        {{ secrets }}
-        {% endif%}
+        
     </td>
 </body>
 

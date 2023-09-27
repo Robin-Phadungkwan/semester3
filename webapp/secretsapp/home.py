@@ -2,7 +2,7 @@
 import functools
 from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash
 from werkzeug.security import check_password_hash, generate_password_hash
-from .db import db_connection, teardown_db, insert_user,select_user,insert_secret
+from .db import db_connection, teardown_db, insert_user,select_user,insert_secret,select_secret
 from datetime import timedelta
 
 #hier worden de blueprints gemaakt.
@@ -27,16 +27,21 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        session.permanent = True
-        select_user(username)
-        session["username"] = select_user(username)
-        return redirect(url_for('home.loggedin', flash = flash))
-    else:
-        if 'username' in session:
+        user = select_user(username,password)
+
+        if user:
+            session.permanent = True
+            session["username"] = username
+            flash("Login successful", "success")
             return redirect(url_for('home.loggedin'))
+        else:
+            flash("Invalid username or password", "error")
+
+    if 'username' in session:
+        return redirect(url_for('home.loggedin'))
+
+    return render_template('login.html') 
         
-        
-        return render_template("login.html")
 
 @bp.route('/register/',methods=['GET','POST'])
 def signup(): 
@@ -48,7 +53,7 @@ def signup():
         Username = request.form['username']
         password = request.form['password'] 
         #hier wordt de data in de database gestopt
-        insert_user(Username, hashpw)
+        insert_user(Username, password)
         flash ('You are now registered')
         return redirect (url_for('home.login'))
     return render_template("sign-up.html")
@@ -62,11 +67,13 @@ def over():
 def loggedin():
     if 'username' in session:
         Username = session['username']
-        #Secrets = request.form['geheim']
-        #print (request.form.get('sus'))
-        #print(request.form.get('name'))
-        #name = request.form['name']
-        #insert_secret(name,Secrets, Username)
+        if request.method == 'POST':
+            name = request.form['name']
+            info = request.form['info']
+            user_name = Username
+            insert_secret(name,info,user_name)
+            flash ('You have added a secret')
+            return redirect (url_for('home.loggedin'))
         return render_template("logged-in.html", Username=Username)
     else:
         return redirect(url_for('home.login'))
