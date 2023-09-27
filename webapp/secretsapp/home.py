@@ -2,14 +2,13 @@
 import functools
 from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash
 from werkzeug.security import check_password_hash, generate_password_hash
-from .db import db_connection, teardown_db, insert_user, select_user, insert_secret
+from .db import db_connection, teardown_db, insert_user,select_user,insert_secret
+from datetime import timedelta
 
 #hier worden de blueprints gemaakt.
+app = Flask(__name__)
 bp = Blueprint("home", __name__)
-about = Blueprint("about",__name__)
-register = Blueprint("register",__name__)
-auth = Blueprint("auth",__name__)
-userlogged = Blueprint("userlogged",__name__)
+app.permanent_session_lifetime = timedelta(minutes=5)
 # maakt dat de wachtwoorden worden gehashed.
 
 @property
@@ -23,21 +22,23 @@ def password(self, password):
 def verify_password(self, password):
     return check_password_hash(self.password_hash, password)
 
-@auth.route('/',methods=['GET','POST'])
+@bp.route('/login/',methods=['GET','POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if "username" in session:
-            user = session["username"]
-            return redirect(url_for('userlogged', user=session["username"]))
-        #hier wordt de data in de database gestopt of gehaald
+        session.permanent = True
+        select_user(username)
+        session["username"] = select_user(username)
+        return redirect(url_for('home.loggedin', flash = flash))
+    else:
+        if 'username' in session:
+            return redirect(url_for('home.loggedin'))
         
-        select_user(username, password)
-        return redirect(url_for('userlogged.loggedin', username = username, password = password))
-    return render_template("login.html")
+        
+        return render_template("login.html")
 
-@register.route('/',methods=['GET','POST'])
+@bp.route('/register/',methods=['GET','POST'])
 def signup(): 
     #post request om de data aan te maken
     if request.method == 'POST':
@@ -45,25 +46,36 @@ def signup():
         hashpw = generate_password_hash(request.form['password'], method= 'pbkdf2:sha256', salt_length=12)
         #hier wordt de username en het wachtwoord van de form afgenomen.
         Username = request.form['username']
-        password = request.form['password']
+        password = request.form['password'] 
         #hier wordt de data in de database gestopt
         insert_user(Username, hashpw)
         flash ('You are now registered')
-        return redirect (url_for('auth.login',   Username = Username, password = password))
+        return redirect (url_for('home.login'))
     return render_template("sign-up.html")
 
 
-@about.route('/')
+@bp.route('/about/')
 def over():
     return render_template("about.html")
 
-@userlogged.route('/', methods=['GET','POST'])
+@bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
-    if request.method == 'POST':
-        secrets = request.form['secrets']
-        insert_secret(secrets, session["username"])
-        return redirect(url_for('userlogged.loggedin', secrets=secrets))
-    return render_template("logged-in.html")
+    if 'username' in session:
+        Username = session['username']
+        #Secrets = request.form['geheim']
+        #print (request.form.get('sus'))
+        #print(request.form.get('name'))
+        #name = request.form['name']
+        #insert_secret(name,Secrets, Username)
+        return render_template("logged-in.html", Username=Username)
+    else:
+        return redirect(url_for('home.login'))
+    
+@bp.route("/logout")
+def logout():
+    session.pop("username", None)
+    flash("You have been logged out.","info")
+    return redirect(url_for("home.index"))
 
 @bp.route("/")
 def index():
