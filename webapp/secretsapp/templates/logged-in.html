@@ -6,23 +6,25 @@
         </div>
         <div class="flexbox-item flexbox-item-1"><a href="/">home</a></div>
         <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
-        <div class="flexbox-item flexbox-item-4"><a class="login" href="#">logout</a></div>
-        <div class="flexbox-item flexbox-item-2">
-            {% if username %}
-            {{ username }}
+        <div class="flexbox-item flexbox-item-3"><a class="login" href="/logout">logout</a></div>
+        <div class="flexbox-item flexbox-item-4">
+            {% if Username %}
+            {{ Username }}
             {% else %}
-            user
-            {% endif %}
-            </div>
+            <a class="login" href="/login/">login</a>
+            {% endif %}</div>
         <div class="axis main-axis"></div>
         <div class="axis cross-axis"></div> 
     </div>
-    <h1> hello {% if username%} {{username}} {%else%} user {% endif%} </h1>
-    <form method="post">
-        <div class="input-box" method="post">
-            <input type="text" name="secrets" placeholder="enter secrets or passwords here">
-        </div> 
-        <button type="submit" class="btn">save</button>
+    <h1> hello {{Username}}</h1>
+    <form action="/logged-in/" method="get" class="login-page flexbox-item-5">
+        <p class="input-box">
+            <input type="text" name="geheim" id="geheim" placeholder="enter secrets or passwords here">
+        </p> 
+        <p class="input-box">
+            <input type="text" name="name" placeholder="what's it for">
+        </p> 
+        <input type="submit" class="btn" value="save">
     </form>
     <td>
         {% if secrets %}
