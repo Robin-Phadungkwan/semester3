@@ -35,18 +35,24 @@ def insert_user(username, hashpw):
     cursor.close()
     db.commit()
 
-def select_user(username, password):
-    db = db_connection()
+def select_user(username):
+    db = db_connection()  # Assuming this function returns a database connection
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM User WHERE username = %s", (username,))
-    myresult = cursor.fetchone()
-    print(myresult)
+    sql = "SELECT username FROM User WHERE username = %s"
+    val = ( username,)  # Use a tuple with a single element
+    cursor.execute(sql, val)
+    result = cursor.fetchone()
+    cursor.close()
+    return result
 
-def insert_secret(secret, username):
+
+
+
+def insert_secret(name,secrets, username):
     db = db_connection()
     cursor = db.cursor()
-    sql = "INSERT INTO Secret (secret, username) VALUES (%s, %s)"
-    val = (secret, username)
+    sql = "INSERT INTO Secret (name,info,user_name) VALUES (%s, %s, %s)"
+    val = (name,secrets,username)
     result = cursor.execute(sql, val)
     db.commit()
     print(result)
