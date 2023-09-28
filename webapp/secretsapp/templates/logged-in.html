@@ -16,6 +16,11 @@
         <div class="axis main-axis"></div>
         <div class="axis cross-axis"></div> 
     </div>
+    <p class="flash">
+        {%for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+        {% endfor %}
+    </p>
     <h1> hello {{Username}}</h1>
     <form action="/logged-in/" method="POST" class="login-page flexbox-item-5">
         <p class="input-box">
@@ -27,7 +32,7 @@
         <input type="submit" class="btn" value="save">
     </form>
     <td>
-        
+       {} 
     </td>
 </body>
 

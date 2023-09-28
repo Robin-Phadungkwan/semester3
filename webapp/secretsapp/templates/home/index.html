@@ -20,7 +20,11 @@
         
     </div>
 </body>
-
+<p class="flash" fade>
+    {%for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+</p>
 <h1>jouw geheimen zijn veilig bij ons</h1>
 <p> met Secret Manager blijven je geheimen en wachtwoorden veilig bewaard zodat jouw diepste geheimen achter slot en grendel blijft.</p>
 <p>Onze missie is om je rust te geven over dat je wachtwoorden en geheimen veilig zijn tegen nieuwsgierige ogen en ongewenste indringers.</p>

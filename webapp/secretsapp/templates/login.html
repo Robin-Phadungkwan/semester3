@@ -20,7 +20,11 @@ content %}
   </div>
 </body>
 <body>
-
+  <p class="flash">
+    {%for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+</p>
   <form action="/login/" method="POST" class="login-page flexbox-item-5">
         <h1>Login</h1>
         <p class="input-box">

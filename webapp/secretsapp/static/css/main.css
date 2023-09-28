@@ -2,6 +2,11 @@
 *{
     font-family: Arial, Helvetica, sans-serif;
 }
+.flash{
+    text-align: center;
+    justify-content: center;
+    animation: fadeOut 1s ease-in-out 3s forwards;
+}
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h2{
     background-color: inherit;
