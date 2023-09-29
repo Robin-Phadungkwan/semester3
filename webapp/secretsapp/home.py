@@ -17,11 +17,10 @@ def password(self):
 
 @password.setter
 def password(self, password):
-    self.password_hash = generate_password_hash(password, method='pbkdf2:ysha256', salt_length=8)
+    self.password_hash = generate_password_hash(password)
 #hier wordt gekeken of het wachtwoord klopt aan de hash.
 def verify_password(self, password):
     return check_password_hash(self.password_hash, password)
-
 
 @bp.route('/login/',methods=['GET','POST'])
 def login():
@@ -29,11 +28,12 @@ def login():
         username = request.form['username']
         password = request.form['password']
         user = select_user(username, password)
+
         if user:
             session.permanent = True
             session["username"] = username
             flash("Login successful", "success")
-            return redirect(url_for('home.loggedin', flash=flash))
+            return redirect(url_for('home.loggedin'))
         else:
             flash("Invalid username or password", "error")
 
@@ -48,14 +48,14 @@ def signup():
     #post request om de data aan te maken
     if request.method == 'POST':
         error = None
-        hashpw = generate_password_hash(request.form['password'], method='pbkdf2:sha256', salt_length=8)
+        hashpw = generate_password_hash(request.form['password'], method= 'sha256')
         #hier wordt de username en het wachtwoord van de form afgenomen.
         Username = request.form['username']
         password = request.form['password'] 
         #hier wordt de data in de database gestopt
         insert_user(Username, password)
         flash ('You are now registered')
-        return redirect (url_for('home.login', flash=flash))
+        return redirect (url_for('home.login'))
     return render_template("sign-up.html")
 
 
@@ -74,7 +74,7 @@ def loggedin():
             insert_secret(name,info,user_name)
             flash ('You have added a secret')
             return redirect (url_for('home.loggedin'))
-        return render_template("logged-in.html",flash=flash,insert_secret=insert_secret, Username=Username)
+        return render_template("logged-in.html", Username=Username)
     else:
         return redirect(url_for('home.login'))
     
@@ -82,9 +82,9 @@ def loggedin():
 def logout():
     session.pop("username", None)
     flash("You have been logged out.","info")
-    return redirect(url_for("home.index", flash=flash))
+    return redirect(url_for("home.index"))
 
 @bp.route("/")
 def index():
-    return render_template("home/index.html", flash=flash)
+    return render_template("home/index.html")
 
