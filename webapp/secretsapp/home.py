@@ -50,14 +50,17 @@ def signup():
     #post request om de data aan te maken
     if request.method == 'POST':
         error = None
-        hashpw = generate_password_hash(request.form['password'], method= 'sha256')
+        hashpw = generate_password_hash(request.form['password'], method= 'pbkdf2:sha256',salt_length=12)
         #hier wordt de username en het wachtwoord van de form afgenomen.
         Username = request.form['username']
         password = request.form['password'] 
         #hier wordt de data in de database gestopt
         insert_user(Username, hashpw)
-        flash ('You are now registered')
-        return redirect (url_for('home.login'))
+        if insert_user == None:
+            flash ('Username is already taken')
+        else:   
+            flash ('You are now registered')
+            return redirect (url_for('home.login'))
     return render_template("sign-up.html")
 
 
