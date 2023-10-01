@@ -2,7 +2,7 @@
 import functools
 from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash
 from werkzeug.security import check_password_hash, generate_password_hash
-from .db import db_connection, teardown_db, insert_user,select_user,insert_secret,select_secret
+from .db import db_connection, teardown_db, insert_user,select_user,insert_secret,select_secret,select_password
 from datetime import timedelta
 
 #hier worden de blueprints gemaakt.
@@ -16,10 +16,10 @@ def password(self):
     raise AttributeError('password is not a readable attribute')
 
 @password.setter
-def password(self, password):
-    self.password_hash = generate_password_hash(password, method='pbkdf2:ysha256', salt_length=8)
+def password(self, password: str):
+    self.password_hash = generate_password_hash(password, method='pbkdf2:sha256')
 #hier wordt gekeken of het wachtwoord klopt aan de hash.
-def verify_password(self, password):
+def verify_password(self, password: str):
     return check_password_hash(self.password_hash, password)
 
 
@@ -28,8 +28,11 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = select_user(username, password)
-        if user:
+        user = select_user(username)
+        hashed = select_password(username)
+        #hier wordt gekeken of de username en het wachtwoord kloppen aan die in de database, zoja dan moet er hij naar de loggedin pagina.
+        #de check_password_hash is een functie die kijkt of het wachtwoord klopt aan de hash en kies de eerste die hij ziet.
+        if user and check_password_hash(hashed[0], password):
             session.permanent = True
             session["username"] = username
             flash("Login successful", "success")
@@ -53,7 +56,7 @@ def signup():
         Username = request.form['username']
         password = request.form['password'] 
         #hier wordt de data in de database gestopt
-        insert_user(Username, password)
+        insert_user(Username, hashpw)
         flash ('You are now registered')
         return redirect (url_for('home.login', flash=flash))
     return render_template("sign-up.html")
@@ -70,10 +73,10 @@ def loggedin():
         if request.method == 'POST':
             name = request.form['name']
             info = request.form['info']
-            user_name = Username
-            insert_secret(name,info,user_name)
+            Username = session['username']
+            insert_secret(name,info,Username)
             flash ('You have added a secret')
-            return redirect (url_for('home.loggedin'))
+            return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_secret=insert_secret))
         return render_template("logged-in.html",flash=flash,insert_secret=insert_secret, Username=Username)
     else:
         return redirect(url_for('home.login'))
