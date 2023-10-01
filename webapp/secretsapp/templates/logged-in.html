@@ -24,16 +24,36 @@
     <h1> hello {{Username}}</h1>
     <form action="/logged-in/" method="POST" class="login-page flexbox-item-5">
         <p class="input-box">
-            <input type="text" name="info" id="geheim" placeholder="enter secrets or passwords here">
+            <input type="text" name="info" id="geheim" placeholder="enter secrets or passwords here" required>
         </p> 
         <p class="input-box">
-            <input type="text" name="name" placeholder="what's it for">
+            <input type="text" name="name" placeholder="what's it for" required>
         </p> 
         <input type="submit" class="btn" value="save">
     </form>
     <td>
-       {} 
+        {% if Username %}
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>info</th>
+                <th>delete</th>
+            </tr>
+            {% for Secret in secrets %}
+            <tr>
+                <td>{{ Secret.Id }}</td>
+                <td>{{ Secret.Name }}</td>
+                <td>{{ Secret.Info }}</td>
+                <td><a href="/delete/{{ secret.id }}">delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>no secrets ☹</p>
+        {% endif %}
     </td>
+    
 </body>
 
 {% endblock %}
