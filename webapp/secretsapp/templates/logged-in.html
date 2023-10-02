@@ -33,7 +33,7 @@
     </form>
     <td>
         {% if Username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
-        <table>
+        <table border="8">
             <tr>
                 <th>id</th>
                 <th>name</th>
@@ -43,9 +43,9 @@
             {% for Secret in secrets %} <!-- hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
             de taart is er een delete knop-->
             <tr>
-                <td>{{ Secret.Id }}</td>
-                <td>{{ Secret.Name }}</td>
-                <td>{{ Secret.Info }}</td>
+                <td>{{ Secret["id"] }}</td>
+                <td>{{ Secret["name"] }}</td>
+                <td>{{ Secret["name"]}}</td>
                 <td><a href="/delete/{{ secret.id }}">delete</a></td>
             </tr>
             {% endfor %}
