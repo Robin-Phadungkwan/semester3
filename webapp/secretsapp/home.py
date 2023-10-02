@@ -44,7 +44,6 @@ def login():
 
     return render_template('login.html') 
         
-
 @bp.route('/register/',methods=['GET','POST'])
 def signup(): 
     #post request om de data aan te maken
@@ -54,24 +53,22 @@ def signup():
         #hier wordt de username en het wachtwoord van de form afgenomen.
         Username = request.form['username']
         #hier wordt gekeken of de username en het wachtwoord niet te lang zijn en als hij te lang is dan moet er een flash op het scherm komen.
-        if len (Username) > 256:
+        if len (Username) > 256: #als de lengte van de username langer is dan 256 dan moet er een flash op het scherm komen.
             flash ('Username is too long')
-        password = request.form['password']
+        password = request.form['password'] # hetzelfde als hierboven maar dan voor het wachtwoord.
         if len (password) > 256:
             flash ('Password is too long')
         #hier wordt de data in de database gestopt.
-        passed = insert_user(Username, hashpw)
+        passed = insert_user(Username, hashpw) #hier wordt de data in de database gestopt.
         #als de data al bestaat in de database dan moet er een flash op het scherm komen waarin wordt gezegd dat de username al bestaat(db.py) en wordt je gereturned.
         if passed == None:
             return render_template("sign-up.html")
         else:   #anders mag je naar de login pagina.
-            flash ('You are now registered')
-            return redirect (url_for('home.login'))
+            flash ('You are now registered') 
+            return redirect (url_for('home.login')) 
     if 'username' in session:
-        return redirect(url_for('home.loggedin'))
-        
+        return redirect(url_for('home.loggedin')) #als de username in de session zit dan wordt je gereturned naar de loggedin pagina.   
     return render_template("sign-up.html") #hier wordt de sign-up pagina gerendered.
-
 
 @bp.route('/about/')
 def over():
@@ -79,12 +76,12 @@ def over():
 
 @bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
-    if 'username' in session:# als de username in de session zit dan mag je naar de logged-in pagina.
+    if 'username' in session: #als de username in de session zit dan mag je naar de logged-in pagina.
         Username = session['username'] #hier wordt de username uit de session gehaald.
         if request.method == 'POST': #als de request een post is dan mag je de data in de database stoppen.
-            name = request.form['name']
-            info = request.form['info']
-            Username = session['username']
+            name = request.form['name'] #hier wordt de naam uit de form gehaald.
+            info = request.form['info'] # hier wordt de info uit de form gehaald.
+            Username = session['username'] #hier wordt de username uit de session gehaald.
             insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
             flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
             return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_secret=insert_secret)) #hier wordt je gereturned naar de logged-in pagina met wat data.
@@ -101,4 +98,3 @@ def logout(): #hier wordt de logout functie gemaakt.
 @bp.route("/")
 def index():
     return render_template("home/index.html")
-
