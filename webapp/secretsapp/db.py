@@ -24,16 +24,26 @@ def teardown_db(exception):
         db.close()
 
 def insert_user(username, hashpw):
-    db = db_connection()
-    cursor = db.cursor()
-    sql = "INSERT INTO User (username, password_hash) VALUES (%s, %s)"
-    val = (username, hashpw)
-    result = cursor.execute(sql, val)
-    db.commit()
-    print(result)
-    print ("Record inserted successfully into users table")
-    cursor.close()
-    db.commit()
+    try:
+        db = db_connection()
+        cursor = db.cursor()
+        sql = "INSERT INTO User (username, password_hash) VALUES (%s, %s)"
+        val = (username, hashpw)
+        result = cursor.execute(sql, val)
+        db.commit()
+        print(result)
+        print ("Record inserted successfully into users table")
+        cursor.close()
+        db.commit()
+        return True
+    except mysql.connector.Error as err:
+        if err.errno == 1062:
+         # This is the MySQL error code for duplicate entry
+            flash("Username already exists", "error")
+        else:
+            # Handle other database errors here
+            flash("An error occurred while processing your request", "error")
+        return None
 
 def select_user(username):
     db = db_connection()  # Assuming this function returns a database connection
@@ -58,26 +68,17 @@ def select_password(username):
     return result
 
 def insert_secret(name,info,username):
-    try:
-        db = db_connection()
-        cursor = db.cursor()
-        sql = "INSERT INTO secrets.Secret (name,info,user_name) VALUES (%s, %s, %s)"
-        val = (name,info,username)
-        result = cursor.execute(sql, val)
-        db.commit()
-        print(result)
-        print ("Record inserted successfully into secrets table")
-        cursor.close()
-        db.commit()
-        return True
-    except mysql.connector.Error as err:
-        if err.errno == 1062:
-         # This is the MySQL error code for duplicate entry
-            flash("Username is already taken", "error")
-        else:
-            # Handle other database errors here
-            flash("An error occurred while processing your request", "error")
-        return None
+    db = db_connection()
+    cursor = db.cursor()
+    sql = "INSERT INTO secrets.Secret (name,info,user_name) VALUES (%s, %s, %s)"
+    val = (name,info,username)
+    result = cursor.execute(sql, val)
+    db.commit()
+    print(result)
+    print ("Record inserted successfully into secrets table")
+    cursor.close()
+    db.commit()
+    
 
 
 def select_secret(username):

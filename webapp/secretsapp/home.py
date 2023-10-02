@@ -53,11 +53,15 @@ def signup():
         hashpw = generate_password_hash(request.form['password'], method= 'pbkdf2:sha256',salt_length=12)
         #hier wordt de username en het wachtwoord van de form afgenomen.
         Username = request.form['username']
-        password = request.form['password'] 
-        #hier wordt de data in de database gestopt
-        insert_user(Username, hashpw)
-        if insert_user == None:
-            flash ('Username is already taken')
+        if len (Username) > 256:
+            flash ('Username is too long')
+        password = request.form['password']
+        if len (password) > 256:
+            flash ('Password is too long')
+        #hier wordt de data in de database gestopt.
+        passed = insert_user(Username, hashpw)
+        if passed == None:
+            return render_template("sign-up.html")
         else:   
             flash ('You are now registered')
             return redirect (url_for('home.login'))
