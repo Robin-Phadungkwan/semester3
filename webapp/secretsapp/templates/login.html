@@ -21,25 +21,25 @@ content %}
 </body>
 <body>
   <p class="flash">
-    {%for message in get_flashed_messages() %}
+    {%for message in get_flashed_messages() %} <!-- hierin komen de flash messages te staan -->
     <div class="flash">{{ message }}</div>
     {% endfor %}
 </p>
   <form action="/login/" method="POST" class="login-page flexbox-item-5">
         <h1>Login</h1>
         <p class="input-box">
-          <input type="username" name="username" placeholder="Username" required>
+          <input type="username" name="username" placeholder="Username" required> <!-- hierin wordt het formulier aangemaakt voor username, required maakt het verplicht om in te vullen -->
         </p>
         <p class="input-box">
-         <input type="password" name="password" placeholder="Password" required>
+         <input type="password" name="password" placeholder="Password" required> <!-- hetzelfde als hierboven maar dan voor password-->
         </p>
-        <div class="remember-forgot">
+        <div class="remember-forgot"> <!-- hiermee wordt een checkbox aangemaakt met de tekst remember me -->
           <label><input type="checkbox" class="checkbox-big" name="remember">Rememeber me</label>
-          <a href="#">Forgot password ?</a>
+          <a href="#">Forgot password ?</a> <!-- hiermee wordt een link aangemaakt met de tekst forgot password -->
         </div>
-        <input type="submit" class="btn" value="login">
+        <input type="submit" class="btn" value="login"> <!-- hiermee wordt een submit button aangemaakt met de tekst login -->
         <div class="register-link">
-          <p>Don't have an account? <a href="/sign-up/">sign up</a></p>
+          <p>Don't have an account? <a href="/sign-up/">sign up</a></p> <!-- hiermee wordt een link aangemaakt met de tekst don't have an account? die verwijst naar sign up -->
         </div>
   </form>
     </div>

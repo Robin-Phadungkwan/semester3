@@ -8,7 +8,7 @@ content %}
         <div class="flexbox-item flexbox-item-1"><a href="/">home</a></div>
         <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
         <div class="flexbox-item flexbox-item-3"><a href="/register/">register</a></div>
-        <div class="flexbox-item flexbox-item-4">
+        <div class="flexbox-item flexbox-item-4"> <!-- hier wordt de username weergegeven als de gebruiker is ingelogd, als de gebruiker niet is ingelogd wordt er een link weergegeven naar de login pagina -->
         {% if Username %}
         {{ Username }}
         {% else %}
@@ -23,26 +23,28 @@ content %}
 
     <form action="/register/" method="POST" class="login-page flexbox-item-5">
                 <h1>Sign Up</h1>
-                <p class="flash">
+                <p class="flash"> <!--hierin komen de flash messages te staan -->
                     {%for message in get_flashed_messages() %}
                     <div class="flash">{{ message }}</div>
-                    {% endfor %}
+                    {% endfor %} <!-- einde flash messages -->	
                 </p>
                 <p class="input-box">
-                    <input type="text" name="username" placeholder="Username" maxlength="256" required>
+                    <input type="text" name="username" placeholder="Username" maxlength="256" required> 
+                    <!-- hierin wordt het formulier aangemaakt voor username, required maakt het verplicht om in te vullen 
+                    max lenght maakt het dat de maximale lengte die kan worden ingevuld 256 is -->
                 </p>
                 <p class="input-box">
-                    <input type="password" name="password" placeholder="Password" maxlength="256" required>
+                    <input type="password" name="password" placeholder="Password" maxlength="256" required> <!-- hetzelfde als hierboven maar dan voor password-->
                 </p>
                 <P class="remember-forgot">
-                    <label><input type="checkbox" class="checkbox-big" required>i agree to the terms</label>
+                    <label><input type="checkbox" class="checkbox-big" required>i agree to the terms</label> <!-- hiermee wordt een checkbox aangemaakt met de tekst i agree to the terms -->
                     <!--<a href="#">Forgot password ?</a>-->
                 </P>
-                <input type="submit" class="btn" value="register">
-                <div class="register-link">
+                <input type="submit" class="btn" value="register"> <!-- hiermee wordt een submit button aangemaakt met de tekst register -->
+                <div class="register-link"> <!-- hiermee wordt een link aangemaakt met de tekst have a account? login -->
                     <p>have a account? <a href="/login/">login</a></p>
                 </div>
     </form>
 </body>
-<p class="copyright">&copy; Robin P</p>
+<p class="copyright">&copy; Robin P</p> <!-- copyright-->
 {% endblock %}
