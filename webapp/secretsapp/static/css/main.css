@@ -183,8 +183,14 @@ input.checkbox-big{
     font-size: 16px;
     color: white;
     font-weight: 600;
-   
 }
+table{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
 /*zet de text van de register knop in het midden*/
 .flexbox-item-5 .register-link{
     font-size: 14,5 px;
