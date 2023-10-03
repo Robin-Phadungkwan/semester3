@@ -9,7 +9,7 @@ def db_connection(): #maak een functie die kan worden gebruikt om connectie te m
         # TODO: do not store secrets on git
 
         app_context_global.db = mysql.connector.connect( #connect to database
-            host="secrets-db",
+            host="secrets-db",# secrets db gebruiken in docker en extern localhost
             user="secrets",
             password="BestPassword",
             database="secrets"
@@ -55,6 +55,7 @@ def select_user(username):
     cursor.close()
     db.commit()
     return result
+
 
 def select_password(username):
     db = db_connection()  # Assuming this function returns a database connection
