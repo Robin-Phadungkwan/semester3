@@ -82,9 +82,10 @@ def loggedin():
             name = request.form['name'] #hier wordt de naam uit de form gehaald.
             info = request.form['info'] # hier wordt de info uit de form gehaald.
             Username = session['username'] #hier wordt de username uit de session gehaald.
-            insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
+            insert_data = insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
             flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
-            return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_secret=insert_secret)) #hier wordt je gereturned naar de logged-in pagina met wat data.
+            data = select_secret(Username) #hier wordt de data uit de database gehaald.
+            return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_data=insert_data, data=data)) #hier wordt je gereturned naar de logged-in pagina met wat data.
         return render_template("logged-in.html",flash=flash,insert_secret=insert_secret, Username=Username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for('home.login'))

@@ -40,13 +40,13 @@
                 <th>info</th>
                 <th>delete</th>
             </tr>
-            {% for Secret in secrets %} <!-- hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
+            {% for row in data %} <!-- hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
             de taart is er een delete knop-->
             <tr>
-                <td>{{ Secret["id"] }}</td>
-                <td>{{ Secret["name"] }}</td>
-                <td>{{ Secret["name"]}}</td>
-                <td><a href="/delete/{{ secret.id }}">delete</a></td>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+                <td><a href="/delete/{{ row[0] }}">delete</a></td>
             </tr>
             {% endfor %}
         </table>
