@@ -71,23 +71,29 @@ def select_password(username):
 def insert_secret(name,info,username):
     db = db_connection() #connect to database
     cursor = db.cursor() #create cursor
-    sql = "INSERT INTO secrets.Secret (name,info,user_name) VALUES (%s, %s, %s)" #insert data into secrets table
+    sql = "INSERT INTO Secret (name,info,user_name) VALUES (%s, %s, %s)" #insert data into secrets table
     val = (name,info,username) #uses a tuple with the elements name, info, and username
     result = cursor.execute(sql, val) #execute sql statement or order 66
     db.commit() #commit changes or do it
     print(result) #print result
-    print ("Record inserted successfully into secrets table") #print dat de record zijn ingevoegd
     cursor.close() #close cursor
-    db.commit() #commit changes again
-    
-
+    db.commit() #commit changes again 
 
 def select_secret(username):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
-    sql = "SELECT * FROM secrets.Secret WHERE user_name = %s" #select all from secrets table where user_name = username
+    sql = "SELECT * FROM Secret WHERE user_name = %s" #select all from secrets table where user_name = username
     val = (username,)  # uses a tuple with the element username 
     cursor.execute(sql, val) #execute sql statement or order 66
-    result = cursor.fetchone() #fetches the first row of the result
+    result = cursor.fetchall() #fetches the first row of the result
     cursor.close() #close cursor
     return result #return result
+
+def delete_secret(id): #execute order 66/ delete secret entry
+    db = db_connection() #connect to database
+    cursor = db.cursor() #create cursor
+    sql = "DELETE FROM Secret WHERE id = %s" #delete from secrets table where id = id
+    val = (id,) #uses a tuple with the element id
+    cursor.execute(sql, val) #execute sql statement or order 66
+    db.commit() #commit changes or do it
+    cursor.close() #close cursor

@@ -2,7 +2,7 @@
 import functools
 from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash
 from werkzeug.security import check_password_hash, generate_password_hash
-from .db import db_connection, teardown_db, insert_user,select_user,insert_secret,select_secret,select_password
+from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret
 from datetime import timedelta
 
 #hier worden de blueprints gemaakt.
@@ -77,16 +77,17 @@ def over():
 @bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
     if 'username' in session: #als de username in de session zit dan mag je naar de logged-in pagina.
-        Username = session['username'] #hier wordt de username uit de session gehaald.
+        Username = session['username']
+        data = select_secret(Username,) #hier wordt de username uit de session gehaald.
         if request.method == 'POST': #als de request een post is dan mag je de data in de database stoppen.
             name = request.form['name'] #hier wordt de naam uit de form gehaald.
             info = request.form['info'] # hier wordt de info uit de form gehaald.
             Username = session['username'] #hier wordt de username uit de session gehaald.
             insert_data = insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
             flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
-            data = select_secret(Username) #hier wordt de data uit de database gehaald.
+             #hier wordt de data uit de database gehaald.
             return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_data=insert_data, data=data)) #hier wordt je gereturned naar de logged-in pagina met wat data.
-        return render_template("logged-in.html",flash=flash,insert_secret=insert_secret, Username=Username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
+        return render_template("logged-in.html",flash=flash,data=data, Username=Username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for('home.login'))
     
@@ -95,6 +96,12 @@ def logout(): #hier wordt de logout functie gemaakt.
     session.pop("username", None) #hier wordt de username uit de session gehaald.
     flash("You have been logged out.","info") #hier wordt een flash op het scherm gezet.
     return redirect(url_for("home.index")) #hier wordt je gereturned naar de index pagina.
+
+@bp.route("/delete/<int:id>") #hier wordt de delete functie gemaakt.
+def delete(id): #hier wordt de delete functie gemaakt.
+    delete_secret(id) #hier wordt de data uit de database gehaald op basis van het id.
+    flash("You have deleted a secret") #hier wordt een flash op het scherm gezet.
+    return redirect(url_for("home.loggedin", flash=flash)) #hier wordt je gereturned naar de loggedin pagina met een flash.
 
 @bp.route("/")
 def index():

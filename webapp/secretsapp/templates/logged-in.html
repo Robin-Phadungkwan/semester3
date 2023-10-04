@@ -21,32 +21,32 @@
         <div class="flash">{{ message }}</div>
         {% endfor %}
     </p>
-    <h1> hello {{Username}}</h1>
-    <form action="/logged-in/" method="POST" class="login-page flexbox-item-5">
-        <p class="input-box">
+     <h1> hello {{Username}}</h1> <!--hier wordt de username weergegeven als de gebruiker is ingelogd -->
+    <form action="/logged-in/" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
+        <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
             <input type="text" name="info" id="geheim" placeholder="enter secrets or passwords here" required>
         </p> 
-        <p class="input-box">
-            <input type="text" name="name" placeholder="what's it for" required>
+        <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor name en wordt gevraagd waar het voor is, required maakt het verplicht om in te vullen -->
+            <input type="text" name="name" placeholder="what or where is it for" required>
         </p> 
-        <input type="submit" class="btn" value="save">
+        <input type="submit" class="btn" value="save"> <!-- hiermee wordt een submit button aangemaakt met de tekst save -->	
     </form>
     <td>
         {% if Username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
-        <table class="table" border="3">
-            <tr>
+        <table class="center" border="3">
+            <tr> <!-- hier worden de kolommen aangemaakt -->
                 <th>id</th>
                 <th>name</th>
                 <th>info</th>
-                <th>delete</th>
+                <th>remove  ?</th>
             </tr>
             {% for row in data %} <!-- hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
             de taart is er een delete knop-->
             <tr>
-                {% for cell in row %}
-                <td>{{ cell }}</td>
-                {% endfor %}
-                <td><a href="/delete/{{ row[0] }}">delete</a></td>
+                <td>{{ row[0] }}</td>
+                <td class="name_info">{{ row[1] }}</td>
+                <td class="info">{{ row[2] }}</td>
+                <td><a href="/delete/{{ row[0] }}" confirm>delete</a></td>
             </tr>
             {% endfor %}
         </table>
