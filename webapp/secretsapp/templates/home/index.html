@@ -8,13 +8,18 @@
         </div>
         <div class="flexbox-item flexbox-item-1"><a href="/">home</a></div>
         <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
-        <div class="flexbox-item flexbox-item-3"><a href="/register/">register</a></div>
+        <div class="flexbox-item flexbox-item-3">
+            {% if Username %}
+            <a class="login" href="/logout">logout</a>
+            {% else %}
+            <a class="login" href="/register/">register</a>
+            {% endif %}</div>
         <div class="flexbox-item flexbox-item-4">
-        {% if Username %}
-        {{ Username }}
-        {% else %}
-        <a class="login" href="/login/">login</a>
-        {% endif %}</div>
+            {% if Username %}
+            <a href="/logged-in/">{{ Username }}</a>
+            {% else %}
+            <a class="login" href="/login/">login</a>
+            {% endif %}</div>
         <div class="axis main-axis"></div>
         <div class="axis cross-axis"></div>
         
