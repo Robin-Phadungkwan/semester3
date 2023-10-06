@@ -104,9 +104,7 @@ a:active, a:visited, a:link, a:hover{
 /*login en register pagina setup met de kleuren en doorgeven wat voor soort container het is, verder important toegevoegd om het extra speciaal te maken en de login in het midden zetten*/
 .flexbox-item-5 {
     display: flexbox;
-    background: transparent;
     border: 2px solid rgba(255,255,255,.2);
-    backdrop-filter: blur(60px);
     color: black;
     justify-content:center;
     align-items: center;
@@ -195,8 +193,14 @@ input.checkbox-big{
 }
 /* maakt het dat name en info groter is dan de rest */
 .info, .name_info{
-    width: 75%;
+    width: 50%;
     text-align: center;
+}
+.delete{
+    background-color: #d4380b;
+}
+.update{
+    background-color: royalblue;
 }
 
 /*zet de text van de register knop in het midden*/
