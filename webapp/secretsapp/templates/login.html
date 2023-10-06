@@ -10,7 +10,7 @@ content %}
       <div class="flexbox-item flexbox-item-3"><a href="/register/">register</a></div>
       <div class="flexbox-item flexbox-item-4">
       {% if Username %}
-      {{ Username }}
+      <a href="/logged-in/">{{ Username }}</a>
       {% else %}
       <a class="login" href="/login/">login</a>
       {% endif %}</div>
@@ -28,11 +28,11 @@ content %}
   <form action="/login/" method="POST" class="login-page flexbox-item-5">
         <h1>Login</h1>
         <p class="input-box">
-          <input type="username" name="username" placeholder="Username" required> <!-- hierin wordt het formulier aangemaakt voor username, required maakt het verplicht om in te vullen -->
+          <input type="username" name="username" placeholder="Username" maxlength="30" required> <!-- hierin wordt het formulier aangemaakt voor username, required maakt het verplicht om in te vullen -->
         </p>
         <p class="input-box">
-         <input type="password" name="password" placeholder="Password" required> <!-- hetzelfde als hierboven maar dan voor password-->
-        </p>
+         <input type="password" name="password" placeholder="Password" maxlength="255" required> <!-- hetzelfde als hierboven maar dan voor password-->
+        </p> 
         <div class="remember-forgot"> <!-- hiermee wordt een checkbox aangemaakt met de tekst remember me -->
           <label><input type="checkbox" class="checkbox-big" name="remember">Rememeber me</label>
           <a href="#">Forgot password ?</a> <!-- hiermee wordt een link aangemaakt met de tekst forgot password -->

@@ -9,7 +9,7 @@
         <div class="flexbox-item flexbox-item-3"><a class="login" href="/logout">logout</a></div>
         <div class="flexbox-item flexbox-item-4">
             {% if Username %}
-            {{ Username }}
+            <a href="/logged-in/">{{ Username }}</a>
             {% else %}
             <a class="login" href="/login/">login</a>
             {% endif %}</div>
@@ -24,10 +24,10 @@
      <h1> hello {{Username}}</h1> <!--hier wordt de username weergegeven als de gebruiker is ingelogd -->
     <form action="/logged-in/" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
         <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
-            <input type="text" name="name" id="geheim" placeholder="where or what is it for" required>
+            <input type="text" name="name" id="geheim" placeholder="where or what is it for" maxlength="30" required>
         </p> 
         <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor name en wordt gevraagd waar het voor is, required maakt het verplicht om in te vullen -->
-            <input type="text" name="info" placeholder="enter secrets or passwords here" required>
+            <input type="text" name="info" placeholder="enter secrets or passwords here" maxlength="255" required >
         </p> 
         <input type="submit" class="btn" value="save"> <!-- hiermee wordt een submit button aangemaakt met de tekst save -->	
     </form>
@@ -45,8 +45,8 @@
             <tr>
                 <td class="name_info">{{ row[1] }}</td>
                 <td class="info">{{ row[2] }}</td>
-                <td><a href="/delete/{{ row[0] }}" confirm>delete</a></td>
-                <td><a href="/update/{{ row[0] }}" confirm>update</a></td>
+                <td class="delete"><a href="/delete/{{ row[0] }}" confirm>delete</a></td>
+                <td class="update"><a href="/update/{{ row[0] }}" confirm>update</a></td>
             </tr>
             {% endfor %}
         </table>
