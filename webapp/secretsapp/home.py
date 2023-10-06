@@ -22,6 +22,11 @@ def password(self, password: str):
 def verify_password(self, password: str):
     return check_password_hash(self.password_hash, password)
 
+@bp.route("/")
+def index():
+    return render_template("home/index.html") #hier wordt de index pagina gerendered met de username.
+
+
 @bp.route('/login/',methods=['GET','POST'])
 def login():
     if request.method == 'POST':
@@ -72,7 +77,7 @@ def signup():
 
 @bp.route('/about/')
 def over():
-    return render_template("about.html")
+    return render_template("about.html") #hier wordt de about pagina gerendered met de username.
 
 @bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
@@ -103,6 +108,3 @@ def delete(id): #hier wordt de delete functie gemaakt.
     flash("You have deleted a secret") #hier wordt een flash op het scherm gezet.
     return redirect(url_for("home.loggedin", flash=flash)) #hier wordt je gereturned naar de loggedin pagina met een flash.
 
-@bp.route("/")
-def index():
-    return render_template("home/index.html")

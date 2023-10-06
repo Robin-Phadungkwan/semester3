@@ -191,10 +191,12 @@ input.checkbox-big{
     margin-right: auto;
     border: 1px solid black;
     height: auto;
+    text-align: center;
 }
 /* maakt het dat name en info groter is dan de rest */
 .info, .name_info{
     width: 75%;
+    text-align: center;
 }
 
 /*zet de text van de register knop in het midden*/
