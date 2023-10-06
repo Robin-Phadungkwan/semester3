@@ -1,6 +1,6 @@
 #hier wordt aangegeven wat er geimporteerd moet worden.
 import functools
-from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash
+from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash,g
 from werkzeug.security import check_password_hash, generate_password_hash
 from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret
 from datetime import timedelta
@@ -10,6 +10,7 @@ app = Flask(__name__)
 bp = Blueprint("home", __name__)
 app.permanent_session_lifetime = timedelta(minutes=5) #hier wordt de session lifetime gemaakt.
 # maakt dat de wachtwoorden worden gehashed.
+
 
 @property
 def password(self): 
@@ -24,8 +25,15 @@ def verify_password(self, password: str):
 
 @bp.route("/")
 def index():
+    if 'username' in session:
+        return render_template("home/index.html", Username=session['username']) #hier wordt de index pagina gerendered met de username.
     return render_template("home/index.html") #hier wordt de index pagina gerendered met de username.
 
+@bp.route('/about/')
+def over():
+    if 'username' in session:
+         return render_template("about.html", Username=session['username']) #hier wordt de about pagina gerendered met de username.
+    return render_template("about.html") #hier wordt de about pagina gerendered met de username.
 
 @bp.route('/login/',methods=['GET','POST'])
 def login():
@@ -58,10 +66,10 @@ def signup():
         #hier wordt de username en het wachtwoord van de form afgenomen.
         Username = request.form['username']
         #hier wordt gekeken of de username en het wachtwoord niet te lang zijn en als hij te lang is dan moet er een flash op het scherm komen.
-        if len (Username) > 256: #als de lengte van de username langer is dan 256 dan moet er een flash op het scherm komen.
+        if len (Username) > 30: #als de lengte van de username langer is dan 256 dan moet er een flash op het scherm komen.
             flash ('Username is too long')
         password = request.form['password'] # hetzelfde als hierboven maar dan voor het wachtwoord.
-        if len (password) > 256:
+        if len (password) > 255:
             flash ('Password is too long')
         #hier wordt de data in de database gestopt.
         passed = insert_user(Username, hashpw) #hier wordt de data in de database gestopt.
@@ -75,10 +83,6 @@ def signup():
         return redirect(url_for('home.loggedin')) #als de username in de session zit dan wordt je gereturned naar de loggedin pagina.   
     return render_template("sign-up.html") #hier wordt de sign-up pagina gerendered.
 
-@bp.route('/about/')
-def over():
-    return render_template("about.html") #hier wordt de about pagina gerendered met de username.
-
 @bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
     if 'username' in session: #als de username in de session zit dan mag je naar de logged-in pagina.
@@ -88,6 +92,10 @@ def loggedin():
             name = request.form['name'] #hier wordt de naam uit de form gehaald.
             info = request.form['info'] # hier wordt de info uit de form gehaald.
             Username = session['username'] #hier wordt de username uit de session gehaald.
+            if len(name)> 30:
+                flash("your name for it is too long")
+            if len(info)> 255:
+                flash("your secret is too long")
             insert_data = insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
             flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
              #hier wordt de data uit de database gehaald.
