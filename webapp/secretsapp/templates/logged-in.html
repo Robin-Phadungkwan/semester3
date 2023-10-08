@@ -35,14 +35,17 @@
         {% if Username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
         <table class="center" border="3">
             <tr> <!-- hier worden de kolommen aangemaakt -->
+                <th>id</th>
                 <th>name</th>
                 <th>info</th>
                 <th>remove ?</th>
                 <th>update ?</th>
             </tr>
-            {% for row in data %} <!-- hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
+            
+            {% for row in data%} <!-- hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
             de taart is er een delete knop-->
             <tr>
+                <td class="id">{{ row[0] }}</td>
                 <td class="name_info">{{ row[1] }}</td>
                 <td class="info">{{ row[2] }}</td>
                 <td class="delete"><a href="/delete/{{ row[0] }}" confirm>delete</a></td>
