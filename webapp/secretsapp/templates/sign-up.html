@@ -1,14 +1,16 @@
 {% extends "base.html" %} {% block title %}register{% endblock %} {% block
 content %}
+hieronder wordt de navigatiebalk weergegeven
 <body class="flexbox">
     <div class="flexbox-container">
-        <div class="flexbox-item-6">
+        <div class="flexbox-logo">
             <h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b>Secret Manager </b></i></h2>
         </div>
-        <div class="flexbox-item flexbox-item-1"><a href="/">home</a></div>
-        <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
-        <div class="flexbox-item flexbox-item-3"><a href="/register/">register</a></div>
-        <div class="flexbox-item flexbox-item-4"> <!-- hier wordt de username weergegeven als de gebruiker is ingelogd, als de gebruiker niet is ingelogd wordt er een link weergegeven naar de login pagina -->
+        <div class="flexbox-item flexbox-home"><a href="/">home</a></div>
+        <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
+        <div class="flexbox-item flexbox-register/logout"><a href="/register/">register</a></div>
+        <div class="flexbox-item flexbox-login/username">
+        <!-- hier wordt de username weergegeven als de gebruiker is ingelogd, als de gebruiker niet is ingelogd wordt er een link weergegeven naar de login pagina -->
         {% if Username %}
         {{ Username }}
         {% else %}
@@ -20,7 +22,7 @@ content %}
     </div>
 </body>
 <body>
-
+<!-- hier wordt de register form weergegeven en wordt met de methode post naar de url /register/ gestuurd -->
     <form action="/register/" method="POST" class="login-page flexbox-item-5">
                 <h1>Sign Up</h1>
                 <p class="flash"> <!--hierin komen de flash messages te staan -->
