@@ -87,8 +87,8 @@ def signup():
     if 'username' in session:
         return redirect(url_for('home.loggedin')) #als de username in de session zit dan wordt je gereturned naar de loggedin pagina.   
     return render_template("sign-up.html") #hier wordt de sign-up pagina gerendered.
-als de username in de session zit dan mag je naar de logged-in pagina, als dat niet zo is dan wordt de gebruiker terugestuurd naar de login pagina.
-als de request een post is dan mag je de data in de database stoppen, maar als je naam voor het ding te lang is of de info is te lang dan gaat het niet in de database.
+# als de username in de session zit dan mag je naar de logged-in pagina, als dat niet zo is dan wordt de gebruiker terugestuurd naar de login pagina.
+# als de request een post is dan mag je de data in de database stoppen, maar als je naam voor het ding te lang is of de info is te lang dan gaat het niet in de database.
 @bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
     if 'username' in session: #als de username in de session zit dan mag je naar de logged-in pagina.
