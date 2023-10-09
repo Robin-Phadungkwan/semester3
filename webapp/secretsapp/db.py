@@ -23,6 +23,8 @@ def teardown_db(exception):
     if db is not None:
         db.close()
 
+# hier maak ik een functie waarmee ik de username en het gehashte wachtwoord in de database kan stoppen.
+# als er een username wordt gestuurd die al in de database staat dan wordt er een error message geflasht en wordt het niet in de database gezet.
 def insert_user(username, hashpw):
     try:
         db = db_connection()
@@ -44,7 +46,8 @@ def insert_user(username, hashpw):
             # Handle other database errors here
             flash("An error occurred while processing your request", "error")
         return None #als het niet is gelukt return none
-
+    
+# hier maak ik een functie waarmee ik de username kan selecteren uit de database
 def select_user(username):
     db = db_connection()  # Assuming this function returns a database connection
     cursor = db.cursor()
@@ -56,7 +59,7 @@ def select_user(username):
     db.commit()
     return result
 
-
+#hieronder maak ik een functie waarmee ik de password_hash kan selecteren uit de database met de username als input
 def select_password(username):
     db = db_connection()  # Assuming this function returns a database connection
     cursor = db.cursor() #create cursor
@@ -68,6 +71,7 @@ def select_password(username):
     db.commit() #commit changes or do it
     return result
 
+#hieronder maak ik een functie waarmee ik de data dat de gebuiker heeft gebruiker heeft ingevoerd in de database kan stoppen
 def insert_secret(name,info,username):
     db = db_connection() #connect to database
     cursor = db.cursor() #create cursor
@@ -79,6 +83,7 @@ def insert_secret(name,info,username):
     cursor.close() #close cursor
     db.commit() #commit changes again 
 
+# hiermee kan ik het uit de database halen
 def select_secret(username):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
@@ -88,7 +93,7 @@ def select_secret(username):
     result = cursor.fetchall() #fetches the first row of the result
     cursor.close() #close cursor
     return result #return result
-
+# hiermee kan je het geheimen uit de database halen op basis van het id
 def delete_secret(id): #execute order 66/ delete secret entry
     db = db_connection() #connect to database
     cursor = db.cursor() #create cursor
