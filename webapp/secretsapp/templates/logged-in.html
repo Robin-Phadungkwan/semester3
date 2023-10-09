@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block title %}logged in{% endblock %} {% block content %}
 <body class="flexbox">
     <div class="flexbox-container">
-        <div class="flexbox-item-6">
+        <div class="flexbox-logo">
             <h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b>Secret Manager </b></i></h2>
         </div>
-        <div class="flexbox-item flexbox-item-1"><a href="/">home</a></div>
-        <div class="flexbox-item flexbox-item-2"><a href="/about/">about</a></div>
-        <div class="flexbox-item flexbox-item-3"><a class="login" href="/logout">logout</a></div>
-        <div class="flexbox-item flexbox-item-4">
+        <div class="flexbox-item flexbox-home"><a href="/">home</a></div>
+        <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
+        <div class="flexbox-item flexbox-register/logout"><a class="login" href="/logout">logout</a></div>
+        <div class="flexbox-item flexbox-login/username">
             {% if Username %}
             <a href="/logged-in/">{{ Username }}</a>
             {% else %}
@@ -22,6 +22,7 @@
         {% endfor %}
     </p>
      <h1> hello {{Username}}</h1> <!--hier wordt de username weergegeven als de gebruiker is ingelogd -->
+     <!-- hier maak ik de form aan voor het opslaan van de geheimen, de action is de url waar het formulier naar toe moet en de method is post -->
     <form action="/logged-in/" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
         <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
             <input type="text" name="name" id="geheim" placeholder="where or what is it for" maxlength="30" required>
@@ -32,6 +33,7 @@
         <input type="submit" class="btn" value="save"> <!-- hiermee wordt een submit button aangemaakt met de tekst save -->	
     </form>
     <td>
+        <!-- als de username in de session is dan moet hij laten zien wat hieronder staat -->
         {% if Username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
         <table class="center" border="3">
             <tr> <!-- hier worden de kolommen aangemaakt -->
@@ -41,17 +43,22 @@
                 <th>remove ?</th>
                 <th>update ?</th>
             </tr>
-            
-            {% for row in data%} <!-- hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
+            <!-- hier doen we een for loop om de geheimen te laten zien,
+            verder maak ik in de id kolom een loop index zodat hij telt hoveel geheimen er zijn
+            in name info komt de naam van het geheim en in info komt de info van het geheim
+            de knoppen delete en update worden aangemaakt en krijgen een link mee naar de delete functie en update functie
+            hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
             de taart is er een delete knop-->
+            {% for row in data%} 
             <tr>
-                <td class="id">{{ row[0] }}</td>
+                <td class="id">{{loop.index}} {{row[]}}</td>
                 <td class="name_info">{{ row[1] }}</td>
                 <td class="info">{{ row[2] }}</td>
                 <td class="delete"><a href="/delete/{{ row[0] }}" confirm>delete</a></td>
                 <td class="update"><a href="/update/{{ row[0] }}" confirm>update</a></td>
             </tr>
             {% endfor %}
+            
         </table>
         {% endif %}
     </td>
