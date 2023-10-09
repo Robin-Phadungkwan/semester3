@@ -66,33 +66,33 @@ body {
     text-align: center;
 }
 /*maakt dat flexbox item 1 en 2 een minimale hoogte heeft van 10 pixels*/
-.flexbox-item-1, .flexbox-item-2 .flexbox-item-6{
+.flexbox-home, .flexbox-about .flexbox-logo{
     min-height: 15px;
 }
 
 /*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
-.flexbox-item-3{
+.flexbox-register/logout{
     min-height: 10px;
     background-color: rgb(0, 255, 0);    
 }
 /*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van blauw krijgt en een text kleur van wit krijgt*/
-.flexbox-item-4{
+.flexbox-login/username{
     min-height: 10px;
     background: rgb(0, 191, 255);
     color: white;
 }
 /*maakt de login knop als er met de muis erover wordt gezweefd lichtblauw*/
-.flexbox-item-4 a:hover{
+.flexbox-login/username a:hover{
     background:lightblue;
     display: block;
 }
 /*maakt de register knop als er met de muis erover wordt gezweefd lichtgroen */
-.flexbox-item-3 a:hover{
+.flexbox-register/logout a:hover{
     background: lightgreen;
     display: block;
 }
 /*maakt de knoppen als er met de muis erover wordt gezweefd lichtgrijs*/
-.flexbox-item-1 a:hover, .flexbox-item-2 a:hover{
+.flexbox-home a:hover, .flexbox-about a:hover{
     background: lightgray;
     display: block;
 }
@@ -196,9 +196,11 @@ input.checkbox-big{
     width: 50%;
     text-align: center;
 }
+/* geeft de class delete een achtergrond kleur van d4380b*/
 .delete{
     background-color: #d4380b;
 }
+/* hetzelfde als hierboven maar dan voor update met de kleur royalblue */
 .update{
     background-color: royalblue;
 }
