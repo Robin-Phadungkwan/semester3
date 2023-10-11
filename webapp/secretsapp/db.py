@@ -83,11 +83,23 @@ def insert_secret(name,info,username):
     cursor.close() #close cursor
     db.commit() #commit changes again 
 
+
+def share_secret(id,username_share):
+    db=db_connection()
+    cursor=db.cursor()
+    sql = "INSERT INTO secret (id,user_name) VALUES (%s, %s)"
+    val = (id,username_share)
+    result = cursor.execute(sql, val)
+    db.commit()
+    print(result)
+    cursor.close()
+    db.commit()
+
 # hiermee kan ik het uit de database halen
 def select_secret(username):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
-    sql = "SELECT * FROM Secret WHERE user_name = %s" #select all from secrets table where user_name = username
+    sql = "SELECT * FROM Secret WHERE user_name or user_name_shared = %s" #select all from secrets table where user_name = username
     val = (username,)  # uses a tuple with the element username 
     cursor.execute(sql, val) #execute sql statement or order 66
     result = cursor.fetchall() #fetches the first row of the result
