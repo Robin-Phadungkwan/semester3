@@ -43,6 +43,7 @@
                 <th>info</th>
                 <th>remove ?</th>
                 <th>update ?</th>
+                <th>share ?</th>
             </tr>
             <!-- hier doen we een for loop om de geheimen te laten zien,
             verder maak ik in de id kolom een loop index zodat hij telt hoveel geheimen er zijn
@@ -58,6 +59,7 @@
                 <td class="info">{{ row[2] }}</td>
                 <td class="delete"><a href="/delete/{{ row[0] }}" confirm>delete</a></td>
                 <td class="update"><a href="/update/{{ row[0] }}" confirm>update</a></td>
+                <td class="share"><a href="/share/{{ row[0] }}" confirm>share</a></td>
             </tr>
             {% endfor %}
             
