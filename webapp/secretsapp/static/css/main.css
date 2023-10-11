@@ -70,24 +70,24 @@ body {
     min-height: 15px;
 }
 
-/*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
-.flexbox-register/logout{
+/*maakt dat flexbox item register een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
+.flexbox-register{
     min-height: 10px;
     background-color: rgb(0, 255, 0);    
 }
 /*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van blauw krijgt en een text kleur van wit krijgt*/
-.flexbox-login/username{
+.flexbox-login{
     min-height: 10px;
     background: rgb(0, 191, 255);
     color: white;
 }
 /*maakt de login knop als er met de muis erover wordt gezweefd lichtblauw*/
-.flexbox-login/username a:hover{
+.flexbox-login a:hover{
     background:lightblue;
     display: block;
 }
 /*maakt de register knop als er met de muis erover wordt gezweefd lichtgroen */
-.flexbox-register/logout a:hover{
+.flexbox-register a:hover{
     background: lightgreen;
     display: block;
 }
