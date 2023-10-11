@@ -204,7 +204,9 @@ input.checkbox-big{
 .update{
     background-color: royalblue;
 }
-
+.share{
+    background-color: green;
+}
 /*zet de text van de register knop in het midden*/
 .flexbox-item-5 .register-link{
     font-size: 14,5 px;
