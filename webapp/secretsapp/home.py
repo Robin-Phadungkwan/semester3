@@ -2,7 +2,7 @@
 import functools
 from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash,g
 from werkzeug.security import check_password_hash, generate_password_hash
-from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret
+from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret,share_secret
 from datetime import timedelta
 
 #hier worden de blueprints gemaakt.
@@ -98,18 +98,30 @@ def loggedin():
             name = request.form['name'] #hier wordt de naam uit de form gehaald.
             info = request.form['info'] # hier wordt de info uit de form gehaald.
             Username = session['username'] #hier wordt de username uit de session gehaald.
-            
             if len(name)> 30:
                 flash("your name for it is too long")
             if len(info)> 255:
                 flash("your secret is too long")
-            insert_data = insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
+            insert_data = insert_secret(name,info,Username,) #hier wordt de data in de database gestopt.
             flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
              #hier wordt de data uit de database gehaald.
             return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_data=insert_data, data=data)) #hier wordt je gereturned naar de logged-in pagina met wat data.
         return render_template("logged-in.html",flash=flash,data=data, Username=Username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for('home.login'))
+    
+@bp.route("/share/<int:id>", methods=["GET", "POST"]) #hier wordt de share functie gemaakt.
+def share(id): #hier wordt de share functie gemaakt.
+    if request.method == "POST": #als de request een post is dan mag je de data in de database stoppen.
+        username = request.form["username"] #hier wordt de username uit de form gehaald.
+        if select_user(username) == None: #als de username niet in de database zit dan moet er een flash op het scherm komen.
+            flash("Username does not exist", "error") #hier wordt een flash op het scherm gezet.
+            return redirect(url_for("home.loggedin")) #hier wordt je gereturned naar de loggedin pagina.
+        shared_data = share_secret(id, username) #hier wordt de data in de database gestopt.
+        flash("You have shared a secret") #hier wordt een flash op het scherm gezet.
+        return redirect(url_for("home.loggedin", flash=flash, shared_data=shared_data)) #hier wordt je gereturned naar de loggedin pagina met een flash.
+    return render_template("share.html") #hier wordt de share pagina gerendered.
+
     
 #hier wordt de logout functie gemaakt en wordt de gebruiker "uitgelogd" en wordt de sessie afgesloten.
 @bp.route("/logout") #hier wordt de logout functie gemaakt.
