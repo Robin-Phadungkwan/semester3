@@ -11,6 +11,7 @@ CREATE TABLE Secret (
     name VARCHAR(30) NOT NULL,
     info VARCHAR(255) NOT NULL,
     user_name VARCHAR(30) NOT NULL,
+    user_name_shared VARCHAR(30) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_name) REFERENCES User(username)
 );
