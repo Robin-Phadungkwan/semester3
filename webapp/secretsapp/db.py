@@ -99,7 +99,7 @@ def share_secret(id,username_share):
 def select_secret(username):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
-    sql = "SELECT * FROM Secret WHERE user_name or user_name_shared = %s" #select all from secrets table where user_name = username
+    sql = "SELECT * FROM Secret WHERE user_name or username_shared = %s" #select all from secrets table where user_name = username
     val = (username,)  # uses a tuple with the element username 
     cursor.execute(sql, val) #execute sql statement or order 66
     result = cursor.fetchall() #fetches the first row of the result
