@@ -21,44 +21,14 @@
         <div class="flash">{{ message }}</div>
         {% endfor %}
     </p>
-    <form action="/share/" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
+    {%for id in secrets %}
+    <form action="/share/{{id}}" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
         <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
-            <input type="text" name="name" id="username" placeholder="where or what is it for" maxlength="30" required>
+            <input type="text" name="username" id="username" placeholder="where or what is it for" maxlength="30" required>
         </p> 
+        {% endfor %}
         <input type="submit" class="btn" value="save"> <!-- hiermee wordt een submit button aangemaakt met de tekst save -->	
     </form>
-    <td>
-        <!-- als de username in de session is dan moet hij laten zien wat hieronder staat -->
-        {% if Username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
-        <table class="center" border="3">
-            <tr> <!-- hier worden de kolommen aangemaakt -->
-                <th>checkbox share</th>
-                <th>id</th>
-                <th>name</th>
-                <th>info</th>
-                <th>remove ?</th>
-                <th>update ?</th>
-            </tr>
-            <!-- hier doen we een for loop om de geheimen te laten zien,
-            verder maak ik in de id kolom een loop index zodat hij telt hoveel geheimen er zijn
-            in name info komt de naam van het geheim en in info komt de info van het geheim
-            de knoppen delete en update worden aangemaakt en krijgen een link mee naar de delete functie en update functie
-            hier worden alle geheimen laten zien met het id, naam en de info, als kers op 
-            de taart is er een delete knop-->
-            {% for row in data%} 
-            <tr>
-                <td class="checkbox"><input type="checkbox" name="share" value="share"></td>
-                <td class="id">{{loop.index}} {{row[]}}</td>
-                <td class="name_info">{{ row[1] }}</td>
-                <td class="info">{{ row[2] }}</td>
-                <td class="delete"><a href="/delete/{{ row[0] }}" confirm>delete</a></td>
-                <td class="update"><a href="/update/{{ row[0] }}" confirm>update</a></td>
-            </tr>
-            {% endfor %}
-            
-        </table>
-        {% endif %}
-    </td>
     
 </body>
 
