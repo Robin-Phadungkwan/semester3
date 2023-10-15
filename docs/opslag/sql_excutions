@@ -2,3 +2,8 @@ SELECT id, name,info, username, password_hash FROM secrets.Secret INNER JOIN sec
 SELECT * FROM secrets.Shared RIGHT JOIN secrets.Secret ON Shared.username = Secret.user_name WHERE user_name = "174618";
 SELECT * FROM secrets.Shared RIGHT JOIN secrets.Secret ON Shared.username = Secret.user_name WHERE username = "admin";
 SELECT * FROM secrets.Shared INNER JOIN secrets.Secret ON Shared.secret_id = Secret.id WHERE username = 'admin';
+SELECT * FROM secrets.Secret RIGHT JOIN secrets.Shared ON Secret.id = Shared.secret_id WHERE user_name = "174618" or  username = "174618";
+
+
+SELECT * FROM secrets.Secret LEFT JOIN secrets.Shared ON Secret.id = Shared.secret_id where user_name_share = "test";
+SELECT id,name,info FROM secrets.Secret RIGHT JOIN secrets.Shared ON Secret.id = Shared.secret_id WHERE user_name = "174618" or  username = "174618";
