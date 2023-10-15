@@ -37,7 +37,6 @@
         {% if Username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
         <table class="center" border="3">
             <tr> <!-- hier worden de kolommen aangemaakt -->
-                <th>checkbox share</th>
                 <th>id</th>
                 <th>name</th>
                 <th>info</th>
@@ -53,7 +52,6 @@
             de taart is er een delete knop-->
             {% for row in data%} 
             <tr>
-                <td class="checkbox"><input type="checkbox" name="share" value="share"></td>
                 <td class="id">{{loop.index}} {{row[]}}</td>
                 <td class="name_info">{{ row[1] }}</td>
                 <td class="info">{{ row[2] }}</td>
@@ -62,7 +60,14 @@
                 <td class="share"><a href="/share/{{ row[0] }}" confirm>share</a></td>
             </tr>
             {% endfor %}
-            
+            {%for row in data2%}
+            <tr>
+                <td class="id">{{loop.index}} {{row[]}}</td>
+                <td class="name_info">{{ row[1] }}</td>
+                <td class="info">{{ row[2] }}</td>
+                <td class="from">{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
         </table>
         {% endif %}
     </td>
