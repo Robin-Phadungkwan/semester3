@@ -1,8 +1,8 @@
 #hier wordt aangegeven wat er geimporteerd moet worden.
 import functools
-from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash,g
+from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash
 from werkzeug.security import check_password_hash, generate_password_hash
-from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret,share_secret,select_secret_id
+from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret,share_secret,select_secret_id,select_secret_share,update_secret
 from datetime import timedelta
 
 #hier worden de blueprints gemaakt.
@@ -93,7 +93,8 @@ def signup():
 def loggedin():
     if 'username' in session: #als de username in de session zit dan mag je naar de logged-in pagina.
         Username = session['username']
-        data = select_secret(Username,) #hier wordt de username uit de session gehaald.
+        data = select_secret(Username) #hier wordt de username uit de session gehaald.
+        data2 = select_secret_share(Username)
         if request.method == 'POST': #als de request een post is dan mag je de data in de database stoppen.
             name = request.form['name'] #hier wordt de naam uit de form gehaald.
             info = request.form['info'] # hier wordt de info uit de form gehaald.
@@ -105,8 +106,8 @@ def loggedin():
             insert_data = insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
             flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
              #hier wordt de data uit de database gehaald.
-            return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_data=insert_data, data=data)) #hier wordt je gereturned naar de logged-in pagina met wat data.
-        return render_template("logged-in.html",flash=flash,data=data, Username=Username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
+            return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_data=insert_data, data=data,data2=data2)) #hier wordt je gereturned naar de logged-in pagina met wat data.
+        return render_template("logged-in.html",flash=flash,data=data,data2=data2, Username=Username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for('home.login'))
     
@@ -127,6 +128,20 @@ def share(id): #hier wordt de share functie gemaakt.
         return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
 
     
+@bp.route("/update/<int:id>", methods=["GET", "POST"]) #hier wordt de update functie gemaakt.
+def update(id): #hier wordt de update functie gemaakt.
+    if 'username' in session: #als de username in de session zit dan mag je naar de update pagina.
+        secrets = select_secret_id(id)
+        if request.method == "POST": #als de request een post is dan mag je de data in de database stoppen.
+            name = request.form["name"] #hier wordt de naam uit de form gehaald.
+            info = request.form["info"] #hier wordt de info uit de form gehaald.
+            update_data = update_secret(name,info,id) #hier wordt de data in de database gestopt.
+            flash("You have updated a secret") #hier wordt een flash op het scherm gezet.
+            return redirect(url_for("home.loggedin", flash=flash,update_data=update_data)) #hier wordt je gereturned naar de loggedin pagina met een flash.
+        return render_template("update.html",secrets=secrets,Username=session['username']) #hier wordt de update pagina gerendered.
+    else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
+        return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
+
 #hier wordt de logout functie gemaakt en wordt de gebruiker "uitgelogd" en wordt de sessie afgesloten.
 @bp.route("/logout") #hier wordt de logout functie gemaakt.
 def logout(): #hier wordt de logout functie gemaakt.
