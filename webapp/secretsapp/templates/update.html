@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %}share{% endblock %} {% block content %}
+<body class="flexbox">
+    <div class="flexbox-container">
+        <div class="flexbox-logo">
+            <h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b>Secret Manager </b></i></h2>
+        </div>
+        <div class="flexbox-item flexbox-home"><a href="/">home</a></div>
+        <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
+        <div class="flexbox-item flexbox-register"><a class="login" href="/logout">logout</a></div>
+        <div class="flexbox-item flexbox-login">
+            {% if Username %}
+            <a href="/logged-in/">{{ Username }}</a>
+            {% else %}
+            <a class="login" href="/login/">login</a>
+            {% endif %}</div>
+        <div class="axis main-axis"></div>
+        <div class="axis cross-axis"></div> 
+    </div>
+    <p class="flash">
+        {%for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+        {% endfor %}
+    </p>
+    {%for id in secrets%}
+    <form action="/update/{{id[0]}}" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
+        <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
+            <input type="text" name="name"  placeholder="What have you type wrong for name?" maxlength="30" required>
+        </p>
+        <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
+            <input type="text" name="info"  placeholder="What you have you typed wrong for info?" maxlength="30" required>
+        </p>
+        {% endfor %}
+        <input type="submit" class="btn" value="save"> <!-- hiermee wordt een submit button aangemaakt met de tekst save -->	
+    </form>	
+    
+</body>
+
+{% endblock %}
