@@ -84,11 +84,11 @@ def insert_secret(name,info,username):
     db.commit() #commit changes again 
 
 
-def share_secret(secred_id,username):
+def share_secret(secret_id,username):
     db=db_connection()
     cursor=db.cursor()
-    sql = "INSERT INTO Shared (secred_id,user_name) VALUES (%s, %s)"
-    val = (secred_id, username)
+    sql = "INSERT INTO Shared (secret_id,user_name_share) VALUES (%s, %s)"
+    val = (secret_id, username)
     result = cursor.execute(sql, val)
     db.commit()
     print(result)
@@ -100,12 +100,30 @@ def share_secret(secred_id,username):
 def select_secret(username):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
-    sql = "SELECT * FROM secrets.Shared INNER JOIN secrets.Secret ON Shared.secret_id = Secret.id WHERE username = %s" #select all from secrets table where user_name = username
+    sql = "SELECT * FROM secrets.Secret WHERE user_name = %s" #select all from secrets table where user_name = username
     val = (username,)  # uses a tuple with the element username 
     cursor.execute(sql, val) #execute sql statement or order 66
     result = cursor.fetchall() #fetches the first row of the result
     cursor.close() #close cursor
     return result #return result
+def select_secret_share(username):
+    db = db_connection()  #connect to database
+    cursor = db.cursor() #create cursor
+    sql = "SELECT id,name,info,user_name FROM secrets.Secret LEFT JOIN secrets.Shared ON Secret.id = Shared.secret_id where user_name_share = %s" #select all from secrets table where user_name = username
+    val = (username,)  # uses a tuple with the element username 
+    cursor.execute(sql, val) #execute sql statement or order 66
+    result = cursor.fetchall() #fetches the first row of the result
+    cursor.close() #close cursor
+    return result #return result
+def update_secret(name,info,id):
+    db = db_connection() #connect to database
+    cursor = db.cursor() #create cursor
+    sql = "UPDATE Secret SET name = %s, info = %s WHERE id = %s" #update info from secrets table where name = name
+    val = (name,info,id) #uses a tuple with the elements name, info, and id
+    cursor.execute(sql, val) #execute sql statement or order 66
+    db.commit() #commit changes or do it
+    cursor.close() #close cursor
+
 
 # hiermee kan je het geheimen uit de database halen op basis van het id
 def delete_secret(id): #execute order 66/ delete secret entry
