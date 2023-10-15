@@ -83,7 +83,7 @@ def insert_secret(name,info,username):
     cursor.close() #close cursor
     db.commit() #commit changes again 
 
-
+# hier deel je het geheim met een andere gebruiker
 def share_secret(secret_id,username):
     db=db_connection()
     cursor=db.cursor()
@@ -96,7 +96,7 @@ def share_secret(secret_id,username):
     db.commit()
 
 
-# hiermee kan ik het uit de database halen
+# hiermee haal ik alle data uit de table secret op basis van de username
 def select_secret(username):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
@@ -106,6 +106,9 @@ def select_secret(username):
     result = cursor.fetchall() #fetches the first row of the result
     cursor.close() #close cursor
     return result #return result
+
+# hier haal je alle  geheimen die zijn gedeeld met de gebruiker op
+# alleen het id, de naam, de info en de username van de persoon die het heeft gedeeld wordt opgehaald
 def select_secret_share(username):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
@@ -115,6 +118,9 @@ def select_secret_share(username):
     result = cursor.fetchall() #fetches the first row of the result
     cursor.close() #close cursor
     return result #return result
+
+# hier update je een secret op basis van de id 
+# de naam en de info worden geupdate waar de id gelijk is aan de id die je hebt meegegeven
 def update_secret(name,info,id):
     db = db_connection() #connect to database
     cursor = db.cursor() #create cursor
@@ -135,6 +141,7 @@ def delete_secret(id): #execute order 66/ delete secret entry
     db.commit() #commit changes or do it
     cursor.close() #close cursor
 
+# hiermee haal ik het id uit de database op basis van de id voor share- en update.html
 def select_secret_id(id):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor

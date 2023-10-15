@@ -36,6 +36,8 @@ def over():
     if 'username' in session:
          return render_template("about.html", Username=session['username']) #hier wordt de about pagina gerendered met de username.
     return render_template("about.html") #hier wordt de about pagina gerendered met de username.
+
+
 # hier wordt de route naar de login pagina gemaakt en als het de methode post is dan moet hij het wachtwoord en username vergelijken met die van de database.
 # omdat het wachtwoord is gehashed moet je de check_password_hash gebruiken om te kijken of het wachtwoord klopt aan de hash.
 # als dat zo is dan moet de gebruiker naar de loggedin pagina met de session data.
@@ -58,8 +60,8 @@ def login():
     #als de username al in de session zit dan wordt je gereturned naar de loggedin pagina.
     if 'username' in session:
         return redirect(url_for('home.loggedin'))
-
     return render_template('login.html') 
+
 # hier wordt de data dat is ingevoerd in de database gestopt en het wachtwoord word voordat hij in de database wordt gestopt eerst gehashed.
 # als de user al een session heeft dan wordt hij gereturned naar de loggedin pagina.        
 @bp.route('/register/',methods=['GET','POST'])
@@ -87,6 +89,8 @@ def signup():
     if 'username' in session:
         return redirect(url_for('home.loggedin')) #als de username in de session zit dan wordt je gereturned naar de loggedin pagina.   
     return render_template("sign-up.html") #hier wordt de sign-up pagina gerendered.
+
+
 # als de username in de session zit dan mag je naar de logged-in pagina, als dat niet zo is dan wordt de gebruiker terugestuurd naar de login pagina.
 # als de request een post is dan mag je de data in de database stoppen, maar als je naam voor het ding te lang is of de info is te lang dan gaat het niet in de database.
 @bp.route('/logged-in/', methods=['GET','POST'])
@@ -111,6 +115,7 @@ def loggedin():
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for('home.login'))
     
+# hiermee kan je je geheimen delen met een andere gebruiker die in de database zit.  
 @bp.route("/share/<int:id>", methods=["GET", "POST"]) #hier wordt de share functie gemaakt.
 def share(id): #hier wordt de share functie gemaakt.
     if 'username' in session: #als de username in de session zit dan mag je naar de share pagina.
@@ -120,14 +125,20 @@ def share(id): #hier wordt de share functie gemaakt.
             if select_user(username) == None: #als de username niet in de database zit dan moet er een flash op het scherm komen.
                 flash("Username does not exist", "error") #hier wordt een flash op het scherm gezet.
                 return redirect(url_for("home.loggedin")) #hier wordt je gereturned naar de loggedin pagina.
-            shared_data = share_secret(id,username) #hier wordt de data in de database gestopt.
-            flash("You have shared a secret") #hier wordt een flash op het scherm gezet.
-            return redirect(url_for("home.loggedin", flash=flash,shared_data=shared_data)) #hier wordt je gereturned naar de loggedin pagina met een flash.
+            try:
+                shared_data = share_secret(id,username) #hier wordt de data in de database gestopt.
+                flash("You have shared a secret") #hier wordt een flash op het scherm gezet.
+                return redirect(url_for("home.loggedin", flash=flash,shared_data=shared_data)) #hier wordt je gereturned naar de loggedin pagina met een flash.
+            except:
+                flash("You have already shared this secret with this user", "error")
         return render_template("share.html",secrets=secrets,Username=session['username']) #hier wordt de share pagina gerendered.
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
 
-    
+# hier worden de route aangemaakt voor om de geheimen te updaten.
+# hiervoor is een functie aangemaakt in db.py die de data opdate op basis van de id van het geheim.
+# daarna wordt het met met update_secret in de database gestopt op de plek van de oude data op basis van het id.
+# daarna wordt je terugegstuurd naar de loggedin pagina met een bericht waar in staat dat je een geheim hebt geupdate.    
 @bp.route("/update/<int:id>", methods=["GET", "POST"]) #hier wordt de update functie gemaakt.
 def update(id): #hier wordt de update functie gemaakt.
     if 'username' in session: #als de username in de session zit dan mag je naar de update pagina.

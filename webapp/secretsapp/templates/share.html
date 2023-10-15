@@ -8,6 +8,7 @@
         <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
         <div class="flexbox-item flexbox-register"><a class="login" href="/logout">logout</a></div>
         <div class="flexbox-item flexbox-login">
+            <!-- als er een username in de session is dan moet hij laten zien wat hieronder staat -->
             {% if Username %}
             <a href="/logged-in/">{{ Username }}</a>
             {% else %}
@@ -21,6 +22,8 @@
         <div class="flash">{{ message }}</div>
         {% endfor %}
     </p>
+    <!-- hiermee  maak je een form voor het delen van je geheim aan een andere gebruiker
+    in de action geef ik door dat hij naar share functie moet gaan met de id dat je hebt doorgegeven in de url -->
     {%for id in secrets%}
     <form action="/share/{{id[0]}}" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
         <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
