@@ -16,12 +16,12 @@ CREATE TABLE Secret (
 );
 
 CREATE TABLE Shared(
-    id INT NOT NULL AUTO_INCREMENT,
+    shared_id INT NOT NULL AUTO_INCREMENT,
     secret_id INT NOT NULL,
-    user_name VARCHAR(30) NOT NULL,
-    PRIMARY KEY (id),
+    user_name_share VARCHAR(30) NOT NULL,
+    PRIMARY KEY (shared_id),
     FOREIGN KEY (secret_id) REFERENCES Secret(id),
-    FOREIGN KEY (user_name) REFERENCES Secret(user_name)
+    FOREIGN KEY (user_name) REFERENCES User(username)
 );
 
 START TRANSACTION;
