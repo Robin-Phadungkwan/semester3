@@ -21,7 +21,7 @@ CREATE TABLE Shared(
     user_name_share VARCHAR(30) NOT NULL,
     PRIMARY KEY (shared_id),
     FOREIGN KEY (secret_id) REFERENCES Secret(id),
-    FOREIGN KEY (user_name) REFERENCES User(username)
+    FOREIGN KEY (user_name_share) REFERENCES User(username)
 );
 
 START TRANSACTION;
