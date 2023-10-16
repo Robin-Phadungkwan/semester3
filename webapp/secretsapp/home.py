@@ -37,6 +37,9 @@ def over():
          return render_template("about.html", Username=session['username']) #hier wordt de about pagina gerendered met de username.
     return render_template("about.html") #hier wordt de about pagina gerendered met de username.
 
+@bp.route('/register_help/')
+def register_help():
+    return render_template("help_register.html") #hier wordt de register_help pagina gerendered met de username.
 
 # hier wordt de route naar de login pagina gemaakt en als het de methode post is dan moet hij het wachtwoord en username vergelijken met die van de database.
 # omdat het wachtwoord is gehashed moet je de check_password_hash gebruiken om te kijken of het wachtwoord klopt aan de hash.
