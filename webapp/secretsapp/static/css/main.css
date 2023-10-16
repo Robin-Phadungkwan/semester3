@@ -9,7 +9,6 @@
 }
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h2{
-    background-color: inherit;
     text-align: center;
     position: sticky;
     align-self: flex-start;
@@ -44,7 +43,7 @@ body {
     max-width: 1000px;
     min-height: 97vh;
     margin: 1em auto;
-    background-color: whitesmoke;
+    background-color: rgba(255,255,255,.8);
     opacity: 0.95;
 }
 /*maakt van alle flexbox een flex item en zet alle text in het midden en maakt dat alle flexboxes center worden gezet */
@@ -55,7 +54,7 @@ body {
     align-self: flex-start;
     position: sticky;
     top: 0px;
-    background-color: #d4380b
+    background-color: #009a22
 }
 /*maakt dat de wijde 200 pixels is en de margin 15 pixels is, verder is de border van flexbox item 3px dik en een solid line en krijgt de kleur #333. achtergrond kleur is alice blue en wordt de text in het midden gezet*/
 .flexbox-item{
@@ -66,24 +65,29 @@ body {
     text-align: center;
 }
 /*maakt dat flexbox item 1 en 2 een minimale hoogte heeft van 10 pixels*/
-.flexbox-home, .flexbox-about .flexbox-logo{
+.flexbox-home, .flexbox-about {
+    min-height: 15px;
+    background-color: #36ba01;
+}
+
+.flexbox-logo{
     min-height: 15px;
 }
 
 /*maakt dat flexbox item register een minimale hoogte heeft van 10 pixels en een achtergrond kleur van groen krijgt*/
 .flexbox-register{
     min-height: 10px;
-    background-color: rgb(0, 255, 0);    
+    background-color:#36ba01;    
 }
 /*maakt dat flexbox item 3 een minimale hoogte heeft van 10 pixels en een achtergrond kleur van blauw krijgt en een text kleur van wit krijgt*/
 .flexbox-login{
     min-height: 10px;
-    background: rgb(0, 191, 255);
+    background: #36ba01;
     color: white;
 }
 /*maakt de login knop als er met de muis erover wordt gezweefd lichtblauw*/
 .flexbox-login a:hover{
-    background:lightblue;
+    background: lightgreen;
     display: block;
 }
 /*maakt de register knop als er met de muis erover wordt gezweefd lichtgroen */
@@ -96,6 +100,7 @@ body {
     background: lightgray;
     display: block;
 }
+
 /*maakt de text kleur zwart met geen text decoratie*/
 a:active, a:visited, a:link, a:hover{
     color: black;
@@ -104,7 +109,6 @@ a:active, a:visited, a:link, a:hover{
 /*login en register pagina setup met de kleuren en doorgeven wat voor soort container het is, verder important toegevoegd om het extra speciaal te maken en de login in het midden zetten*/
 .flexbox-item-5 {
     display: flexbox;
-    border: 2px solid rgba(255,255,255,.2);
     color: black;
     justify-content:center;
     align-items: center;
@@ -173,11 +177,11 @@ input.checkbox-big{
 .flexbox-item-5 .btn, .btn {
     width: 100%;
     height: 90px;
-    background: black;
+    background: #009a22;
     border: none;
     outline: none;
     border-radius: 30 px;
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    box-shadow: 0 0 10px #36ba01;
     cursor: pointer;
     font-size: 16px;
     color: white;
@@ -198,7 +202,7 @@ input.checkbox-big{
 }
 /* geeft de class delete een achtergrond kleur van d4380b*/
 .delete{
-    background-color: #d4380b;
+    background-color: #009a22;
 }
 /* hetzelfde als hierboven maar dan voor update met de kleur royalblue */
 .update{
@@ -231,7 +235,7 @@ p.copyright{
 @media all and (max-width: 480px) {
     .flexbox-container{
         flex-direction: column;
-        background-color:  #d4380b;
+        background-color:  #009a22;
     }
     
     .flexbox-item{
@@ -240,8 +244,8 @@ p.copyright{
         text-align: center;
         padding-top: 2px;
         margin-bottom: 2px;
-        border: 2px solid  #d4380b;
-        background-color:  #d4380b;  
+        border: 2px solid  #009a22;
+        background-color:  #009a22;  
         border-bottom: 2px solid black;
     }
 }
