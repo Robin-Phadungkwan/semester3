@@ -187,6 +187,9 @@ input.checkbox-big{
     color: white;
     font-weight: 600;
 }
+.help{
+    text-align: center;
+}
 /* maakt dat de table in het midden staat voor de data */
 .center{
     margin-left: auto;
@@ -202,14 +205,14 @@ input.checkbox-big{
 }
 /* geeft de class delete een achtergrond kleur van d4380b*/
 .delete{
-    background-color: #009a22;
+    background-color: red;
 }
 /* hetzelfde als hierboven maar dan voor update met de kleur royalblue */
 .update{
     background-color: royalblue;
 }
 .share{
-    background-color: green;
+    background-color: #009a22;
 }
 /*zet de text van de register knop in het midden*/
 .flexbox-item-5 .register-link{
@@ -229,6 +232,9 @@ input.checkbox-big{
 }
 /*zet de copyright in het midden*/
 p.copyright{
+    text-align: center;
+}
+.help-text{
     text-align: center;
 }
 /* hier het zelfde maar dan voor handheld modus*/
