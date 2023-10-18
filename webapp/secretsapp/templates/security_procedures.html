@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- hieronder wordt de navigatiebalk weergegeven -->
+<body class="flexbox">
+    <div class="flexbox-container">
+        <div class="flexbox-logo">
+            <h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b>Secret Manager </b></i></h2>
+        </div>
+        <div class="flexbox-item flexbox-home"><a href="/">home</a></div>
+        <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
+        <div class="flexbox-item flexbox-register">
+            <!-- hieronder wordt de username weergegeven als de gebruiker is ingelogd, als de gebruiker niet is ingelogd wordt er een link weergegeven naar de register pagina -->
+            {% if username %}
+            <a class="login" href="/logout">logout</a>
+            {% else %}
+            <a class="login" href="/register/">register</a>
+            {% endif %}
+        </div>
+        <div class="flexbox-item flexbox-login">
+            {% if username %}
+            <a href="/logged-in/">{{ username }}</a>
+            {% else %}
+            <a class="login" href="/login/">login</a>
+            {% endif %}</div>
+        <div class="axis main-axis"></div>
+        <div class="axis cross-axis"></div>
+        
+    </div>
+</body>
+<footer class="security_procedures">
+    <h1>Security Procedures</h1>
+    <h2>Secret Manager is een webapplicatie die is ontwikkeld om geheimen te beheren.</h2>
+    <h2>hieronder een paar Procedures die zijn genomen om deze app te zijn beveiligd</h2>
+    <h3>sql injections</h3>
+    <p>in de sql functies een placeholder neerzetten die later wordt ingevuld via de invulformulieren, hierdoor kan een sql injection niet gebeuren
+        omdat de sql een waarde verwacht die van een andere functie in de lijst komt. zie het als een soort slot dat hele goede slagpinnen heeft</p>
+    <h3>hashing</h3>
+    <p>de wachtwoorden worden gehashed en vergeleken met de hash in de database, als de hash overeenkomt met de hash in de database dan mag de gebruiker inloggen. de reden waarom  </p>
+    <h3>session</h3>
+
+</footer>
+<p class="copyright">&copy; Robin P </p>
+{% endblock %}
