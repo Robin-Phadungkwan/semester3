@@ -4,7 +4,6 @@ from flask import Flask, Blueprint,render_template, request,session,url_for,redi
 from werkzeug.security import check_password_hash, generate_password_hash
 from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret,share_secret,select_secret_id,select_secret_share,update_secret
 from datetime import timedelta
-import time
 
 #hier worden de blueprints gemaakt.
 app = Flask(__name__)
@@ -75,15 +74,15 @@ def signup():
         #hier wordt de hash gemaakt van het wachtwoord.
         hashpw = generate_password_hash(request.form['password'], method= 'pbkdf2:sha256',salt_length=12)
         #hier wordt de username en het wachtwoord van de form afgenomen.
-        Username = request.form['username']
+        username = request.form['username']
         #hier wordt gekeken of de username en het wachtwoord niet te lang zijn en als hij te lang is dan moet er een flash op het scherm komen.
-        if len (Username) > 30: #als de lengte van de username langer is dan 256 dan moet er een flash op het scherm komen.
+        if len (username) > 30: #als de lengte van de username langer is dan 256 dan moet er een flash op het scherm komen.
             flash ('Username is too long')
         password = request.form['password'] # hetzelfde als hierboven maar dan voor het wachtwoord.
         if len (password) > 255:
             flash ('Password is too long')
         #hier wordt de data in de database gestopt.
-        passed = insert_user(Username, hashpw) #hier wordt de data in de database gestopt.
+        passed = insert_user(username, hashpw) #hier wordt de data in de database gestopt.
         #als de data al bestaat in de database dan moet er een flash op het scherm komen waarin wordt gezegd dat de username al bestaat(db.py) en wordt je gereturned.
         if passed == None:
             return render_template("sign-up.html")
@@ -100,22 +99,22 @@ def signup():
 @bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
     if 'username' in session: #als de username in de session zit dan mag je naar de logged-in pagina.
-        Username = session['username']
-        data = select_secret(Username) #hier wordt de username uit de session gehaald.
-        data2 = select_secret_share(Username)
+        username = session['username']
+        secrets = select_secret(username) #hier wordt de username uit de session gehaald.
+        shared_secrets = select_secret_share(username)
         if request.method == 'POST': #als de request een post is dan mag je de data in de database stoppen.
             name = request.form['name'] #hier wordt de naam uit de form gehaald.
             info = request.form['info'] # hier wordt de info uit de form gehaald.
-            Username = session['username'] #hier wordt de username uit de session gehaald.
+            username = session['username'] #hier wordt de username uit de session gehaald.
             if len(name)> 30:
                 flash("your name for it is too long")
             if len(info)> 255:
                 flash("your secret is too long")
-            insert_data = insert_secret(name,info,Username) #hier wordt de data in de database gestopt.
+            insert_data = insert_secret(name,info,username) #hier wordt de data in de database gestopt.
             flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
              #hier wordt de data uit de database gehaald.
-            return redirect (url_for('home.loggedin', flash=flash, Username=Username, insert_data=insert_data, data=data,data2=data2)) #hier wordt je gereturned naar de logged-in pagina met wat data.
-        return render_template("logged-in.html",flash=flash,data=data,data2=data2, Username=Username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
+            return redirect (url_for('home.loggedin', flash=flash, username=username, insert_data=insert_data, secrets=secrets,shared_secrets=shared_secrets)) #hier wordt je gereturned naar de logged-in pagina met wat data.
+        return render_template("logged-in.html",flash=flash,secrets=secrets,shared_secrets=shared_secrets, username=username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for('home.login'))
     
