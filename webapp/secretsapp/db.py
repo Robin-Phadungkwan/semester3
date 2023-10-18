@@ -146,7 +146,7 @@ def select_secret_id(id):
     db = db_connection()  #connect to database
     cursor = db.cursor() #create cursor
     sql = "SELECT id FROM Secret WHERE id = %s" #select all from secrets table where user_name = username
-    val = (id,)  # uses a tuple with the element id
+    val = (id,) # uses a tuple with the element id
     cursor.execute(sql, val) #execute sql statement or order 66
     result = cursor.fetchall() #fetches the first row of the result
     cursor.close() #close cursor
