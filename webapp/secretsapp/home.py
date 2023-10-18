@@ -3,7 +3,8 @@ import functools
 from flask import Flask, Blueprint,render_template, request,session,url_for,redirect,flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from .db import insert_user,select_user,insert_secret,select_secret,select_password,delete_secret,share_secret,select_secret_id,select_secret_share,update_secret
-from datetime import timedelta,time
+from datetime import timedelta
+import time
 
 #hier worden de blueprints gemaakt.
 app = Flask(__name__)
@@ -51,25 +52,15 @@ def login():
         password = request.form['password']
         user = select_user(username)
         hashed = select_password(username)
-        max_attempts = 3
-
-        count = 0
         #hier wordt gekeken of de username en het wachtwoord kloppen aan die in de database, zoja dan moet er hij naar de loggedin pagina.
         #de check_password_hash is een functie die kijkt of het wachtwoord klopt aan de hash en kies de eerste die hij ziet.
-        while count < max_attempts:
-            if user and check_password_hash(hashed[0], password):
-                session.permanent = True #hier wordt de session permanent gemaakt.
-                session["username"] = username #hier wordt de username in de session gezet.
-                flash("Login successful", "success") #hier wordt een flash op het scherm gezet.
-                return redirect(url_for('home.loggedin')) #hier wordt je gereturned naar de loggedin pagina.
-            else:
-                flash("Invalid username or password", "error") #hier wordt een flash op het scherm gezet als de login of password fout is.
-                count += 1
-        if count == max_attempts:
-            flash("You have exceeded the maximum number of attempts", "error")
-            time = time(0, 0, 0)
-            return redirect(url_for('home.login'))
-            
+        if user and check_password_hash(hashed[0], password):
+            session.permanent = True #hier wordt de session permanent gemaakt.
+            session["username"] = username #hier wordt de username in de session gezet.
+            flash("Login successful", "success") #hier wordt een flash op het scherm gezet.
+            return redirect(url_for('home.loggedin')) #hier wordt je gereturned naar de loggedin pagina.
+        else:
+            flash("Invalid username or password", "error") #hier wordt een flash op het scherm gezet als de login of password fout is.
     #als de username al in de session zit dan wordt je gereturned naar de loggedin pagina.
     if 'username' in session:
         return redirect(url_for('home.loggedin'))
@@ -131,7 +122,7 @@ def loggedin():
 # hiermee kan je je geheimen delen met een andere gebruiker die in de database zit.  
 @bp.route("/share/<int:id>", methods=["GET", "POST"]) #hier wordt de share functie gemaakt.
 def share(id): #hier wordt de share functie gemaakt.
-    if 'username' in session: #als de username in de session zit dan mag je naar de share pagina.
+    if 'username' in session : #als de username in de session zit dan mag je naar de share pagina.
         secrets = select_secret_id(id)
         if request.method == "POST": #als de request een post is dan mag je de data in de database stoppen.
             username = request.form["username"] #hier wordt de username uit de form gehaald.
@@ -145,6 +136,7 @@ def share(id): #hier wordt de share functie gemaakt.
             except:
                 flash("You have already shared this secret with this user", "error")
         return render_template("share.html",secrets=secrets,Username=session['username']) #hier wordt de share pagina gerendered.
+    
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
 
