@@ -40,7 +40,12 @@ def over():
 @bp.route('/register_help/')
 def register_help():
     return render_template("help_register.html") #hier wordt de register_help pagina gerendered met de username.
-
+@bp.route('/security/')
+def security():
+    return render_template("security.html")
+@bp.route('/security_procedures/')
+def security_procedures():
+    return render_template("security_procedures.html")
 # hier wordt de route naar de login pagina gemaakt en als het de methode post is dan moet hij het wachtwoord en username vergelijken met die van de database.
 # omdat het wachtwoord is gehashed moet je de check_password_hash gebruiken om te kijken of het wachtwoord klopt aan de hash.
 # als dat zo is dan moet de gebruiker naar de loggedin pagina met de session data.
