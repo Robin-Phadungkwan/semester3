@@ -9,8 +9,8 @@
         <div class="flexbox-item flexbox-register"><a class="login" href="/logout">logout</a></div>
         <div class="flexbox-item flexbox-login">
             <!-- als er een username in de session is dan moet hij laten zien wat hieronder staat -->
-            {% if Username %}
-            <a href="/logged-in/">{{ Username }}</a>
+            {% if username %}
+            <a href="/logged-in/">{{ username }}</a>
             {% else %}
             <a class="login" href="/login/">login</a>
             {% endif %}</div>

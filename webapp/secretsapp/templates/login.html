@@ -9,8 +9,8 @@ content %}
       <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
       <div class="flexbox-item flexbox-register"><a href="/register/">register</a></div>
       <div class="flexbox-item flexbox-login">
-      {% if Username %}
-      <a href="/logged-in/">{{ Username }}</a>
+      {% if username %}
+      <a href="/logged-in/">{{ username }}</a>
       {% else %}
       <a class="login" href="/login/">login</a>
       {% endif %}</div>
@@ -28,7 +28,7 @@ content %}
   <form action="/login/" method="POST" class="login-page flexbox-item-5">
         <h1>Login</h1>
         <p class="input-box">
-          <input type="username" name="username" placeholder="Username" maxlength="30" required> <!-- hierin wordt het formulier aangemaakt voor username, required maakt het verplicht om in te vullen -->
+          <input type="username" name="username" placeholder="username" maxlength="30" required> <!-- hierin wordt het formulier aangemaakt voor username, required maakt het verplicht om in te vullen -->
         </p>
         <p class="input-box">
          <input type="password" name="password" placeholder="Password" maxlength="255" required> <!-- hetzelfde als hierboven maar dan voor password-->

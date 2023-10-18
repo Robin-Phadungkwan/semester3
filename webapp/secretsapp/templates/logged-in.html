@@ -8,8 +8,8 @@
         <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
         <div class="flexbox-item flexbox-register"><a class="login" href="/logout">logout</a></div>
         <div class="flexbox-item flexbox-login">
-            {% if Username %}
-            <a href="/logged-in/">{{ Username }}</a>
+            {% if username %}
+            <a href="/logged-in/">{{ username }}</a>
             {% else %}
             <a class="login" href="/login/">login</a>
             {% endif %}</div>
@@ -21,7 +21,7 @@
         <div class="flash">{{ message }}</div>
         {% endfor %}
     </p>
-     <h1> hello {{Username}}</h1> <!--hier wordt de username weergegeven als de gebruiker is ingelogd -->
+     <h1> hello {{username}}</h1> <!--hier wordt de username weergegeven als de gebruiker is ingelogd -->
      <!-- hier maak ik de form aan voor het opslaan van de geheimen, de action is de url waar het formulier naar toe moet en de method is post -->
     <form action="/logged-in/" method="POST" class="login-page flexbox-item-5"> <!--hier word de method en action aangegeven voor het formulier-->
         <p class="input-box"> <!-- hierin wordt het formulier aangemaakt voor info, required maakt het verplicht om in te vullen -->
@@ -34,7 +34,7 @@
     </form>
     <td>
         <!-- als de username in de session is dan moet hij laten zien wat hieronder staat -->
-        {% if Username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
+        {% if username %} <!-- als de gebruiker is ingelogd wordt er een tabel weergegeven met de geheimen die de gebruiker heeft ingevoerd -->
         <table class="center" border="3">
             <tr> <!-- hier worden de kolommen aangemaakt -->
                 <th>id</th>

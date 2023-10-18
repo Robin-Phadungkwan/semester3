@@ -11,14 +11,14 @@
         <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
         <div class="flexbox-item flexbox-register">
             <!-- als de username in de session is dan moet hij de username laten zien, als hij er niet is dan moet hij een link laten zien naar de register pagina -->
-            {% if Username %}
+            {% if username %}
             <a class="login" href="/logout">logout</a>
             {% else %}
             <a class="login" href="/register/">register</a>
             {% endif %}</div>
         <div class="flexbox-item flexbox-login">
-            {% if Username %}
-            <a href="/logged-in/">{{ Username }}</a>
+            {% if username %}
+            <a href="/logged-in/">{{ username }}</a>
             {% else %}
             <a class="login" href="/login/">login</a>
             {% endif %}</div>
