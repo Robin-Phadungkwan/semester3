@@ -27,14 +27,14 @@ def verify_password(self, password: str):
 @bp.route("/")
 def index():
     if 'username' in session:
-        return render_template("home/index.html", Username=session['username']) #hier wordt de index pagina gerendered met de username.
+        return render_template("home/index.html", username=session['username']) #hier wordt de index pagina gerendered met de username.
     return render_template("home/index.html") #hier wordt de index pagina gerendered met de username.
 
 # dit is de route naar de about pagina.
 @bp.route('/about/')
 def over():
     if 'username' in session:
-         return render_template("about.html", Username=session['username']) #hier wordt de about pagina gerendered met de username.
+         return render_template("about.html", username=session['username']) #hier wordt de about pagina gerendered met de username.
     return render_template("about.html") #hier wordt de about pagina gerendered met de username.
 
 @bp.route('/register_help/')
@@ -139,7 +139,7 @@ def share(id): #hier wordt de share functie gemaakt.
                 return redirect(url_for("home.loggedin", flash=flash,shared_data=shared_data)) #hier wordt je gereturned naar de loggedin pagina met een flash.
             except:
                 flash("You have already shared this secret with this user", "error")
-        return render_template("share.html",secrets=secrets,Username=session['username']) #hier wordt de share pagina gerendered.
+        return render_template("share.html",secrets=secrets,username=session['username']) #hier wordt de share pagina gerendered.
     
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
@@ -161,6 +161,7 @@ def update(id): #hier wordt de update functie gemaakt.
         return render_template("update.html",secrets=secrets,Username=session['username']) #hier wordt de update pagina gerendered.
     else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
         return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
+
 
 #hier wordt de logout functie gemaakt en wordt de gebruiker "uitgelogd" en wordt de sessie afgesloten.
 @bp.route("/logout") #hier wordt de logout functie gemaakt.
