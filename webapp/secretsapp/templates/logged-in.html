@@ -43,7 +43,6 @@
                 <th>remove ?</th>
                 <th>update ?</th>
                 <th>share ?</th>
-                <th>from who is the secret ?</th>
             </tr>
             <!-- hier doen we een for loop om de geheimen te laten zien,
             verder maak ik in de id kolom een loop index zodat hij telt hoveel geheimen er zijn
@@ -61,14 +60,19 @@
                 <td class="share"><a href="/share/{{ row[0] }}">share</a></td>
             </tr>
             {% endfor %}
+            <br>
+            <tr> <!-- hier worden de kolommen aangemaakt -->
+                <th>id</th>
+                <th>name</th>
+                <th>info</th>
+                <th>from who?</th>
+            </tr>
+    
             {%for row in shared_secrets%}
             <tr>
                 <td class="id">{{loop.index}} {{row[]}}</td>
                 <td class="name_info">{{ row[1] }}</td>
                 <td class="info">{{ row[2] }}</td>
-                <td class="delete">{{ row []}}</td>
-                <td class="update">{{ row []}}</td>
-                <td class="share">{{ row []}}</td>
                 <td class="from">{{ row[3] }}</td>
             </tr>
             {% endfor %}
