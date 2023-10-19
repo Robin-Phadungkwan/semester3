@@ -7,6 +7,10 @@
     text-align: center;
     justify-content: center;
 }
+footer{
+    flex-direction: row;
+    justify-content: center;
+}
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h2{
     text-align: center;
