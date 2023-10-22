@@ -34,7 +34,6 @@ def insert_user(username, hashpw):
         result = cursor.execute(sql, val)
         db.commit()
         print(result)
-        print ("Record inserted successfully into users table")
         cursor.close()
         db.commit()
         return True # als het is gelukt return true
@@ -49,7 +48,7 @@ def insert_user(username, hashpw):
     
 # hier maak ik een functie waarmee ik de username kan selecteren uit de database
 def select_user(username):
-    db = db_connection()  # Assuming this function returns a database connection
+    db = db_connection()
     cursor = db.cursor()
     sql = "SELECT username FROM User WHERE username = %s"
     val = ( username,)  # Use a tuple with a single element
@@ -61,27 +60,27 @@ def select_user(username):
 
 #hieronder maak ik een functie waarmee ik de password_hash kan selecteren uit de database met de username als input
 def select_password(username):
-    db = db_connection()  # Assuming this function returns a database connection
-    cursor = db.cursor() #create cursor
+    db = db_connection()
+    cursor = db.cursor() 
     sql = "SELECT password_hash FROM User WHERE username = %s"  #select password_hash from User where username = username
-    val = ( username,)  # Use a tuple with a single element
-    cursor.execute(sql, val) #execute sql statement or order 66
-    result = cursor.fetchone() #fetches the first row of the result
-    cursor.close()  #close cursor
-    db.commit() #commit changes or do it
+    val = ( username,)  
+    cursor.execute(sql, val) 
+    result = cursor.fetchone()
+    cursor.close()
+    db.commit() 
     return result
 
 #hieronder maak ik een functie waarmee ik de data dat de gebuiker heeft gebruiker heeft ingevoerd in de database kan stoppen
 def insert_secret(name,info,username):
-    db = db_connection() #connect to database
-    cursor = db.cursor() #create cursor
-    sql = "INSERT INTO Secret (name,info,user_name) VALUES (%s, %s, %s)" #insert data into secrets table
-    val = (name,info,username) #uses a tuple with the elements name, info, and username
-    result = cursor.execute(sql, val) #execute sql statement or order 66
-    db.commit() #commit changes or do it
-    print(result) #print result
-    cursor.close() #close cursor
-    db.commit() #commit changes again 
+    db = db_connection()
+    cursor = db.cursor() 
+    sql = "INSERT INTO Secret (name,info,user_name) VALUES (%s, %s, %s)" 
+    val = (name,info,username)
+    result = cursor.execute(sql, val)
+    db.commit()
+    print(result)  
+    cursor.close()  
+    db.commit()    
 
 # hier deel je het geheim met een andere gebruiker
 def share_secret(secret_id,username):
@@ -110,44 +109,44 @@ def select_secret(username):
 # hier haal je alle  geheimen die zijn gedeeld met de gebruiker op
 # alleen het id, de naam, de info en de username van de persoon die het heeft gedeeld wordt opgehaald
 def select_secret_share(username):
-    db = db_connection()  #connect to database
-    cursor = db.cursor() #create cursor
+    db = db_connection() 
+    cursor = db.cursor()
     sql = "SELECT id,name,info,user_name FROM secrets.Secret LEFT JOIN secrets.Shared ON Secret.id = Shared.secret_id where user_name_share = %s" #select all from secrets table where user_name = username
-    val = (username,)  # uses a tuple with the element username 
-    cursor.execute(sql, val) #execute sql statement or order 66
-    result = cursor.fetchall() #fetches the first row of the result
-    cursor.close() #close cursor
-    return result #return result
+    val = (username,) 
+    cursor.execute(sql, val)
+    result = cursor.fetchall() 
+    cursor.close()
+    return result 
 
 # hier update je een secret op basis van de id 
 # de naam en de info worden geupdate waar de id gelijk is aan de id die je hebt meegegeven
 def update_secret(name,info,id):
-    db = db_connection() #connect to database
-    cursor = db.cursor() #create cursor
+    db = db_connection()
+    cursor = db.cursor()
     sql = "UPDATE Secret SET name = %s, info = %s WHERE id = %s" #update info from secrets table where name = name
-    val = (name,info,id) #uses a tuple with the elements name, info, and id
-    cursor.execute(sql, val) #execute sql statement or order 66
-    db.commit() #commit changes or do it
-    cursor.close() #close cursor
+    val = (name,info,id)
+    cursor.execute(sql, val) #
+    db.commit() 
+    cursor.close()
 
 
 # hiermee kan je het geheimen uit de database halen op basis van het id
 def delete_secret(id): #execute order 66/ delete secret entry
-    db = db_connection() #connect to database
-    cursor = db.cursor() #create cursor
+    db = db_connection()
+    cursor = db.cursor() 
     sql = "DELETE FROM Secret WHERE id = %s" #delete from secrets table where id = id
-    val = (id,) #uses a tuple with the element id
-    cursor.execute(sql, val) #execute sql statement or order 66
-    db.commit() #commit changes or do it
-    cursor.close() #close cursor
+    val = (id,) 
+    cursor.execute(sql, val) 
+    db.commit() 
+    cursor.close() 
 
 # hiermee haal ik het id uit de database op basis van de id voor share- en update.html
 def select_secret_id(id):
-    db = db_connection()  #connect to database
-    cursor = db.cursor() #create cursor
-    sql = "SELECT id FROM Secret WHERE id = %s" #select all from secrets table where user_name = username
-    val = (id,) # uses a tuple with the element id
-    cursor.execute(sql, val) #execute sql statement or order 66
-    result = cursor.fetchall() #fetches the first row of the result
-    cursor.close() #close cursor
-    return result #return result
+    db = db_connection() 
+    cursor = db.cursor() 
+    sql = "SELECT id FROM Secret WHERE id = %s" 
+    val = (id,) 
+    cursor.execute(sql, val)
+    result = cursor.fetchall() 
+    cursor.close()
+    return result
