@@ -1,67 +1,41 @@
-{% extends "base.html" %}
-
+{% extends "base.html" %} {% block title %}security{% endblock %}
 {% block content %}
 <!-- hieronder wordt de navigatiebalk weergegeven -->
-<body class="flexbox">
-    <div class="flexbox-container">
-        <div class="flexbox-logo">
-            <h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b>Secret Manager </b></i></h2>
-        </div>
-        <div class="flexbox-item flexbox-home"><a href="/">home</a></div>
-        <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
-        <div class="flexbox-item flexbox-register">
-            <!-- hieronder wordt de username weergegeven als de gebruiker is ingelogd, als de gebruiker niet is ingelogd wordt er een link weergegeven naar de register pagina -->
-            {% if username %}
-            <a class="login" href="/logout">logout</a>
-            {% else %}
-            <a class="login" href="/register/">register</a>
-            {% endif %}
-        </div>
-        <div class="flexbox-item flexbox-login">
-            {% if username %}
-            <a href="/logged-in/">{{ username }}</a>
-            {% else %}
-            <a class="login" href="/login/">login</a>
-            {% endif %}</div>
-        <div class="axis main-axis"></div>
-        <div class="axis cross-axis"></div>
-        
-    </div>
-</body>
-<footer class="security">
-    <h1>hoe is mijn login en data veilig?<h1>
-    <p> de formulieren worden via een post request naar de database opgestuurd om de data daarin te controleren op wat u heeft ingetypt.
-        De reden waarom het via een post request wordt verstuurd is
-        omdat het dan niet zichtbaar is in de url en het niet kan worden onderschept door een kwaadwillig persoon of hobby hacker.
-    </p>
+<body>
+    <h1>Hoe is mijn login en data veilig?</h1>
+        <p>De formulieren worden via een post request naar de database opgestuurd om de data daarin te controleren op wat u heeft ingetypt.
+            De reden waarom het via een post request wordt verstuurd is
+            omdat het dan niet zichtbaar is in de url en het niet kan worden onderschept door een kwaadwillig persoon of hobby hacker.
+        </p>
+
     <p>Deze website is beveiligd met een geheime key waardoor de website een eigen certificaat heeft.
-        Verder zijn de wachtwoorden die worden gebruikt geëncrypt via een hash en 
-        tijdens het login process vergeleken met het plain text wachwoord wat is ingevoerd met de hash in de database, 
-        als dat waar is dan mag de gebruiker inloggen en geheimen invoeren.
-        De data mag alleen worden laten zien als de session een username heeft gekregen, 
-        anders wordt de gebruiker teruggestuurd naar de login pagina
-        De gebruiker ziet alleen zijn data en kan het delen, 
-        de persoon waarnaar het geheim is gestuurd kan alleen het geheim zien en kan niks 
-        eraan veranderen waardoor het geheim niet verloren gaat maar wel gedeeld kan worden.
-        de website is getest op de volgende punten:</p>
-        <ul>
-            <li>SQL injection</li>
-        </ul>
-        <p>De manier waarop de sql injections zijn getest is door de volgende code in te voeren in de input velden:</p>
-        <ul>
-            <li>1' OR '1'='1</li>
-            <li>1' OR '1'='1'--</li>
-            <li>admin' or '1'='1'</li>
-        </ul>
-        <p>Deze code is ingevoerd in de input velden en de database heeft geen data laten zien die niet van de gebruiker is.
-            de data wordt niet vrijgegeven en de text wordt door de applicatie als plaintext overgenomen en niet als sql code.
-        </p>
-        <h2>Waarom hashen?</h2>
-        <p>De reden waarom we het wachtwoord van u hashen is omdat het dan moelijker voor een kwaadwillig persoon om met de data uit onze database
-            iets te doen, als de data wordt gestolen dan is het voor de kwaadwillige persoon moeilijk om de data te gebruiken omdat het gehasht is.
-            Verder is het voor de kwaadwillige persoon moeilijk om de data te decrypten omdat het gehasht is waardoor uw grote geheimen nooit op straat zullen komen.
-        </p>
-    </h2>
-</footer>
+    Verder zijn de wachtwoorden die worden gebruikt geëncrypt via een hash en 
+    tijdens het login process vergeleken met het plain text wachwoord wat is ingevoerd met de hash in de database, 
+    als dat waar is dan mag de gebruiker inloggen en geheimen invoeren.
+    De data mag alleen worden laten zien als de session een username heeft gekregen, 
+    anders wordt de gebruiker teruggestuurd naar de login pagina
+    De gebruiker ziet alleen zijn data en kan het delen, 
+    de persoon waarnaar het geheim is gestuurd kan alleen het geheim zien en kan niks 
+    eraan veranderen waardoor het geheim niet verloren gaat maar wel gedeeld kan worden.
+    de website is getest op de volgende punten:</p>
+    <ul>
+        <li>SQL injection</li>
+    </ul>
+    <p>De manier waarop de sql injections zijn getest is door de volgende code in te voeren in de input velden:</p>
+    <ul>
+        <li>1' OR '1'='1</li>
+        <li>1' OR '1'='1'--</li>
+        <li>admin' or '1'='1'</li>
+    </ul>
+    <p>Deze code is ingevoerd in de input velden en de database heeft geen data laten zien die niet van de gebruiker is.
+        de data wordt niet vrijgegeven en de text wordt door de applicatie als plaintext overgenomen en niet als sql code.
+    </p>
+    <h2>Waarom hashen?</h2>
+    <p>De reden waarom we het wachtwoord van u hashen is omdat het dan moelijker voor een kwaadwillig persoon om met de data uit onze database
+    iets te doen, als de data wordt gestolen dan is het voor de kwaadwillige persoon moeilijk om de data te gebruiken omdat het gehasht is.
+    Verder is het voor de kwaadwillige persoon moeilijk om de data te decrypten omdat het gehasht is waardoor uw grote geheimen nooit op straat zullen komen.
+    </p>
+    
+</body>
 <p class="copyright">&copy; Robin P </p>
 {% endblock %}

@@ -1,21 +1,5 @@
 {% extends "base.html" %} {% block title %}logged in{% endblock %} {% block content %}
-<body class="flexbox">
-    <div class="flexbox-container">
-        <div class="flexbox-logo">
-            <h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b>Secret Manager </b></i></h2>
-        </div>
-        <div class="flexbox-item flexbox-home"><a href="/">home</a></div>
-        <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
-        <div class="flexbox-item flexbox-register"><a class="login" href="/logout">logout</a></div>
-        <div class="flexbox-item flexbox-login">
-            {% if username %}
-            <a href="/logged-in/">{{ username }}</a>
-            {% else %}
-            <a class="login" href="/login/">login</a>
-            {% endif %}</div>
-        <div class="axis main-axis"></div>
-        <div class="axis cross-axis"></div> 
-    </div>
+<body>
     <p class="flash">
         {%for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
