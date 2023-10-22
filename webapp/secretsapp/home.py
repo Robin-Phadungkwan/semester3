@@ -27,19 +27,19 @@ def verify_password(self, password: str):
 @bp.route("/")
 def index():
     if 'username' in session:
-        return render_template("home/index.html", username=session['username']) #hier wordt de index pagina gerendered met de username.
-    return render_template("home/index.html") #hier wordt de index pagina gerendered met de username.
+        return render_template("home/index.html", username=session['username']) 
+    return render_template("home/index.html") 
 
 # dit is de route naar de about pagina.
 @bp.route('/about/')
 def over():
     if 'username' in session:
-         return render_template("about.html", username=session['username']) #hier wordt de about pagina gerendered met de username.
-    return render_template("about.html") #hier wordt de about pagina gerendered met de username.
+         return render_template("about.html", username=session['username'])
+    return render_template("about.html") 
 
 @bp.route('/register_help/')
 def register_help():
-    return render_template("help_register.html") #hier wordt de register_help pagina gerendered met de username.
+    return render_template("help_register.html")
 @bp.route('/security/')
 def security():
     return render_template("security.html")
@@ -61,8 +61,8 @@ def login():
         if user and check_password_hash(hashed[0], password):
             session.permanent = True #hier wordt de session permanent gemaakt.
             session["username"] = username #hier wordt de username in de session gezet.
-            flash("Login successful", "success") #hier wordt een flash op het scherm gezet.
-            return redirect(url_for('home.loggedin')) #hier wordt je gereturned naar de loggedin pagina.
+            flash("Login successful", "success")
+            return redirect(url_for('home.loggedin'))
         else:
             flash("Invalid username or password", "error") #hier wordt een flash op het scherm gezet als de login of password fout is.
     #als de username al in de session zit dan wordt je gereturned naar de loggedin pagina.
@@ -95,85 +95,84 @@ def signup():
             flash ('You are now registered') 
             return redirect (url_for('home.login')) 
     if 'username' in session:
-        return redirect(url_for('home.loggedin')) #als de username in de session zit dan wordt je gereturned naar de loggedin pagina.   
-    return render_template("sign-up.html") #hier wordt de sign-up pagina gerendered.
+        return redirect(url_for('home.loggedin'))
+    return render_template("sign-up.html") 
 
 
 # als de username in de session zit dan mag je naar de logged-in pagina, als dat niet zo is dan wordt de gebruiker terugestuurd naar de login pagina.
 # als de request een post is dan mag je de data in de database stoppen, maar als je naam voor het ding te lang is of de info is te lang dan gaat het niet in de database.
 @bp.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
-    if 'username' in session: #als de username in de session zit dan mag je naar de logged-in pagina.
+    if 'username' in session: 
         username = session['username']
-        secrets = select_secret(username) #hier wordt de username uit de session gehaald.
+        secrets = select_secret(username) 
         shared_secrets = select_secret_share(username)
-        if request.method == 'POST': #als de request een post is dan mag je de data in de database stoppen.
-            name = request.form['name'] #hier wordt de naam uit de form gehaald.
-            info = request.form['info'] # hier wordt de info uit de form gehaald.
-            username = session['username'] #hier wordt de username uit de session gehaald.
+        if request.method == 'POST': 
+            name = request.form['name'] 
+            info = request.form['info'] 
+            username = session['username'] 
             if len(name)> 30:
                 flash("your name for it is too long")
             if len(info)> 255:
                 flash("your secret is too long")
-            insert_data = insert_secret(name,info,username) #hier wordt de data in de database gestopt.
-            flash ('You have added a secret') #hier wordt een flash op het scherm gezet.
-             #hier wordt de data uit de database gehaald.
-            return redirect (url_for('home.loggedin', flash=flash, username=username, insert_data=insert_data, secrets=secrets,shared_secrets=shared_secrets)) #hier wordt je gereturned naar de logged-in pagina met wat data.
-        return render_template("logged-in.html",flash=flash,secrets=secrets,shared_secrets=shared_secrets, username=username) #hier wordt de logged-in pagina gerendered met username en flash en secret data.
-    else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
+            insert_data = insert_secret(name,info,username) 
+            flash ('You have added a secret') 
+            return redirect (url_for('home.loggedin', flash=flash, username=username, insert_data=insert_data, secrets=secrets,shared_secrets=shared_secrets))
+        return render_template("logged-in.html",flash=flash,secrets=secrets,shared_secrets=shared_secrets, username=username)
+    else: 
         return redirect(url_for('home.login'))
     
 # hiermee kan je je geheimen delen met een andere gebruiker die in de database zit.  
-@bp.route("/share/<int:id>", methods=["GET", "POST"]) #hier wordt de share functie gemaakt.
-def share(id): #hier wordt de share functie gemaakt.
-    if 'username' in session : #als de username in de session zit dan mag je naar de share pagina.
+@bp.route("/share/<int:id>", methods=["GET", "POST"])
+def share(id): 
+    if 'username' in session :
         secrets = select_secret_id(id)
-        if request.method == "POST": #als de request een post is dan mag je de data in de database stoppen.
-            username = request.form["username"] #hier wordt de username uit de form gehaald.
-            if select_user(username) == None: #als de username niet in de database zit dan moet er een flash op het scherm komen.
-                flash("Username does not exist", "error") #hier wordt een flash op het scherm gezet.
-                return redirect(url_for("home.loggedin")) #hier wordt je gereturned naar de loggedin pagina.
+        if request.method == "POST": 
+            username = request.form["username"] 
+            if select_user(username) == None: 
+                flash("Username does not exist", "error")  
+                return redirect(url_for("home.loggedin")) 
             try:
-                shared_data = share_secret(id,username) #hier wordt de data in de database gestopt.
-                flash("You have shared a secret") #hier wordt een flash op het scherm gezet.
-                return redirect(url_for("home.loggedin", flash=flash,shared_data=shared_data)) #hier wordt je gereturned naar de loggedin pagina met een flash.
+                shared_data = share_secret(id,username) 
+                flash("You have shared a secret")  
+                return redirect(url_for("home.loggedin", flash=flash,shared_data=shared_data)) 
             except:
                 flash("You have already shared this secret with this user", "error")
-        return render_template("share.html",secrets=secrets,username=session['username']) #hier wordt de share pagina gerendered.
+        return render_template("share.html",secrets=secrets,username=session['username'])
     
-    else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
-        return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
+    else: 
+        return redirect(url_for("home.login")) 
 
 # hier worden de route aangemaakt voor om de geheimen te updaten.
 # hiervoor is een functie aangemaakt in db.py die de data opdate op basis van de id van het geheim.
 # daarna wordt het met met update_secret in de database gestopt op de plek van de oude data op basis van het id.
 # daarna wordt je terugegstuurd naar de loggedin pagina met een bericht waar in staat dat je een geheim hebt geupdate.    
 @bp.route("/update/<int:id>", methods=["GET", "POST"]) #hier wordt de update functie gemaakt.
-def update(id): #hier wordt de update functie gemaakt.
-    if 'username' in session: #als de username in de session zit dan mag je naar de update pagina.
+def update(id): 
+    if 'username' in session: 
         secrets = select_secret_id(id)
-        if request.method == "POST": #als de request een post is dan mag je de data in de database stoppen.
-            name = request.form["name"] #hier wordt de naam uit de form gehaald.
-            info = request.form["info"] #hier wordt de info uit de form gehaald.
-            update_data = update_secret(name,info,id) #hier wordt de data in de database gestopt.
-            flash("You have updated a secret") #hier wordt een flash op het scherm gezet.
-            return redirect(url_for("home.loggedin", flash=flash,update_data=update_data)) #hier wordt je gereturned naar de loggedin pagina met een flash.
-        return render_template("update.html",secrets=secrets,Username=session['username']) #hier wordt de update pagina gerendered.
-    else: #als de username niet in de session zit dan wordt je gereturned naar de login pagina.
-        return redirect(url_for("home.login")) #hier wordt je gereturned naar de login pagina.
+        if request.method == "POST": 
+            name = request.form["name"] 
+            info = request.form["info"] 
+            update_data = update_secret(name,info,id) 
+            flash("You have updated a secret")  
+            return redirect(url_for("home.loggedin", flash=flash,update_data=update_data)) 
+        return render_template("update.html",secrets=secrets,Username=session['username']) 
+    else: 
+        return redirect(url_for("home.login"))
 
 
 #hier wordt de logout functie gemaakt en wordt de gebruiker "uitgelogd" en wordt de sessie afgesloten.
-@bp.route("/logout") #hier wordt de logout functie gemaakt.
-def logout(): #hier wordt de logout functie gemaakt.
-    session.pop("username", None) #hier wordt de username uit de session gehaald.
-    flash("You have been logged out.","info") #hier wordt een flash op het scherm gezet.
-    return redirect(url_for("home.index")) #hier wordt je gereturned naar de index pagina.
+@bp.route("/logout") 
+def logout(): 
+    session.pop("username", None)
+    flash("You have been logged out.","info")  
+    return redirect(url_for("home.index")) 
 
 #hier wordt de delete functie gemaakt en wordt de data uit de database verwijdert op basis van het id.
-@bp.route("/delete/<int:id>") #hier wordt de delete functie gemaakt.
-def delete(id): #hier wordt de delete functie gemaakt.
-    delete_secret(id) #hier wordt de data uit de database gehaald op basis van het id.
-    flash("You have deleted a secret") #hier wordt een flash op het scherm gezet.
-    return redirect(url_for("home.loggedin", flash=flash)) #hier wordt je gereturned naar de loggedin pagina met een flash.
+@bp.route("/delete/<int:id>") 
+def delete(id):
+    delete_secret(id) 
+    flash("You have deleted a secret")  
+    return redirect(url_for("home.loggedin", flash=flash)) 
 
