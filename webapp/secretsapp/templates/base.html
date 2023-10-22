@@ -8,7 +8,32 @@
 </head>
 <body>
     <div class="content">
+        <body class="flexbox">
+            <div class="flexbox-container">
+                <div class="flexbox-logo">
+                    <h2> <img class="logo" src="../static/images/lock.png" alt="logo secret manager"> <i><b>Secret Manager </b></i></h2>
+                </div>
+                <div class="flexbox-item flexbox-home"><a href="/">home</a></div>
+                <div class="flexbox-item flexbox-about"><a href="/about/">about</a></div>
+                <div class="flexbox-item flexbox-register">
+                    <!-- als de username in de session is dan moet hij de username laten zien, als hij er niet is dan moet hij een link laten zien naar de register pagina -->
+                    {% if username %}
+                    <a class="login" href="/logout">logout</a>
+                    {% else %}
+                    <a class="login" href="/register/">register</a>
+                    {% endif %}</div>
+                <div class="flexbox-item flexbox-login">
+                    {% if username %}
+                    <a href="/logged-in/">{{ username }}</a>
+                    {% else %}
+                    <a class="login" href="/login/">login</a>
+                    {% endif %}</div>
+                <div class="axis main-axis"></div>
+                <div class="axis cross-axis"></div>
+                
+            </div>
+        </body>
         {% block content %}{% endblock %}
     </div>
-      
+     
 </body>
