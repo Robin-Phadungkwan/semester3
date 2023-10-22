@@ -7,9 +7,27 @@
     text-align: center;
     justify-content: center;
 }
-footer{
+.help, .security, .security_procedure{
+    margin: 1em auto;
     flex-direction: row;
     justify-content: center;
+    background-color: #009a22;
+}
+h3{
+    text-align: center;
+}
+ul{
+    list-style-type:square;
+}
+.copyright{
+    text-align: center;
+}
+footer.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 2em solid #009a22;
+    background-color: #009a22;
 }
 /*maakt dat h1 een achtergrondkleur van whitesmoke heeft en een border van 2pixels heeft die zwart en solide is, de text in het midden staat en dat hij blijft staan als je naar beneden scrolt*/
 h2{
