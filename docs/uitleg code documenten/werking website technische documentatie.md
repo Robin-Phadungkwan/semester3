@@ -2,25 +2,26 @@
 
 ## werking website
 
-Ik ben in dit blok bezig geweest met maken van de app/website genaamd Secret Manager, daarvoor heb ik gewerkt met flask,mysql,html,css en python.
-flask kan worden gebruikt om een database met een website te verbinden en om html's te verbinden met elkaar.
+In dit blok ben ik bezig geweest met maken van de app/website genaamd Secret Manager. Hiervoor heb ik gewerkt met Flask,MySQL,HTML,CSS en Python.
+Flask kan worden gebruikt om een database met een website te verbinden en om HTML-pagina's te verbinden met elkaar.
 
-ik gebruik flask om de website genaamd secret manager te maken, dat maak ik voor een project op school waarvoor ik een website of app moest maken
+Ik gebruik Flask om de website genaamd Secret Manager te maken, dat maak ik voor een schoolproject waarvoor ik een website of app moest maken.
 
-de website is gemaakt waardoor je jouw geheimen en wachtwoorden kan bewaren, een voorbeeld ervan is keepass.
-hieronder vertel ik per python bestand wat precies elk python bestand doet
+De website is gemaakt om jouw geheimen en wachtwoorden te bewaren, het is vergelijkbaar met keepass.
+Hieronder leg ik uit wat elk Python-bestand doet.
 
 ### db.py
 
-in db.py wordt er connectie gemaakt met de database en worden alle functies die in andere python bestanden waarvoor er een database wordt gebruikt gemaakt.
+In db.py wordt er verbinding gemaakt met de database en worden alle functies die in andere python bestanden waarvoor er een database wordt gebruikt gemaakt.
 
-de functies zijn als volgt en waarvoor ze gebruikt worden.
+De functies zijn als volgt en hun gebruik:
 
 insert_user wordt gebruikt om een user te registreren.
-Hieronder de code hoe het werkt:
+
+Hieronder de code hoe ik het heb laten werken:
 
 ```python
-maak ik een functie waarmee ik de username en het gehashte wachtwoord in de database kan stoppen.
+# hier maak ik een functie waarmee ik de username en het gehashte wachtwoord in de database kan stoppen.
 # als er een username wordt gestuurd die al in de database staat dan wordt er een error message geflasht en wordt het niet in de database gezet.
 def insert_user(username, hashpw):
     try:
@@ -191,9 +192,11 @@ def select_secret_id(id):
 ```
 
 ### home.py
-in home.py worden de routes aangemaakt waardoor flask weet waar hij naar doe moet als een link wordt ingedrukt, voor elke route wordt er voor elke route een functie gedefineerd.
-bij de routes van login en signup is er een GET/POST methode toegevoegd. dat doe ik om de input van de user in de database te stoppen.
-de code om dat te doen is als volgt:
+
+In home.py worden de routes gedefinieerd waardoor flask weet waar hij naar toe moet als een link wordt ingedrukt, voor elke route wordt er een functie gedefineerd.
+Bij de routes van login en signup is zowel de GET- als de POST-methode toegevoegd om gebruikersgegevens op te slaan in de database.
+De code om dat te doen is als volgt:
+
 ```python
 @bp.route('/login/',methods=['GET','POST'])
 def login():
@@ -244,12 +247,56 @@ def signup():
         return redirect(url_for('home.loggedin')) #als de username in de session zit dan wordt je gereturned naar de loggedin pagina.   
     return render_template("sign-up.html") #hier wordt de sign-up pagina gerendered.
 ```
-ik heb bij sign up gemaakt dat de username en het gehashte wachtwoord in de database gemaakt, om het wachwoordt te hashen wordt er gebruik gemaakt van werkzeug, en dan de functies generate_password_hash, de functie maakt het dat het wachtwoordt met een salt lengte die je zelf kan geven maakt. daarna wordt in login het wachtwoordt wat is ingetypt door de gebruiker vergeleken met het wachtwoordt wat in de database staat met behulp van de functie check_password_hash, als die gelijk zijn aan elkaar en de user is bekend in de database. Dan mag de gebruiker inloggen en wordt hij doorgestuurd naar zijn user pagina.
+Ik heb bij sign up gemaakt dat de username en het gehashte wachtwoord in de database wordt gestopt, om het wachtwoordt te hashen wordt er gebruik gemaakt van werkzeug, en dan de functies generate_password_hash. De functie maakt het dat het wachtwoordt met een salt lengte die je zelf kan geven maakt. Daarna wordt in login het wachtwoordt wat is ingetypt door de gebruiker vergeleken met het wachtwoordt wat in de database staat met behulp van de functie check_password_hash, als die gelijk zijn aan elkaar en de user is bekend in de database. Dan mag de gebruiker inloggen en wordt hij doorgestuurd naar zijn user pagina.
 
 #### user pagina 
-nadat je ben ingelogd zul je je persoonlijke pagina zien met de data die voor jou bestemd is met je geheimen, gebruikersnaam en geheimen die met je zijn gedeelt.
+na het inloggen zie je je persoonlijke pagina met de gegevens die voor jou bedoeld zijn, inclusief je geheimen,gebruikersnaam en de gedeelde geheimen.
 
-De manier waarop de data wordt opgehaald is via de sessie die is aangemaakt terwijl de user wordt ingelogd. de geheimen van de user zelf en de geheiemen die met de user is gedeeld worden opgehaald uit de database aan de hand van de username.
+De manier waarop de data wordt opgehaald is via een sessie die is aangemaakt terwijl de user wordt ingelogd. De geheimen van de user zelf en de geheiemen die met de user is gedeeld worden opgehaald uit de database op basis van de username.
+
+Hieronder de code hoe het is gedaan in home.py en db.py:
+
+```python
+def select_secret(username):
+    db = db_connection()  #connect to database
+    cursor = db.cursor() #create cursor
+    sql = "SELECT * FROM secrets.Secret WHERE user_name = %s" #select all from secrets table where user_name = username
+    val = (username,)  # uses a tuple with the element username 
+    cursor.execute(sql, val) #execute sql statement or order 66
+    result = cursor.fetchall() #fetches the first row of the result
+    cursor.close() #close cursor
+    return result #return result
+```
+
+Hierboven de code van db.py.
+
+```python
+@bp.route('/logged-in/', methods=['GET','POST'])
+def loggedin():
+    if 'username' in session: 
+        username = session['username']
+        secrets = select_secret(username) 
+        shared_secrets = select_secret_share(username)
+        if request.method == 'POST': 
+            name = request.form['name'] 
+            info = request.form['info'] 
+            username = session['username'] 
+            if len(name)> 30:
+                flash("your name for it is too long")
+            if len(info)> 255:
+                flash("your secret is too long")
+            insert_data = insert_secret(name,info,username) 
+            flash ('You have added a secret') 
+            return redirect (url_for('home.loggedin', flash=flash, username=username, insert_data=insert_data, secrets=secrets,shared_secrets=shared_secrets))
+        return render_template("logged-in.html",flash=flash,secrets=secrets,shared_secrets=shared_secrets, username=username)
+    else: 
+        return redirect(url_for('home.login'))
+```
+
+home.py
+
+De userpagina wordt alleen laten zien als de user is ingelogd.
 
 ### init.py
--
+
+In init.py wordt de Flask-app gemaakt met daarin de definities van de routes waar alle routes worden gedefinieerd.
