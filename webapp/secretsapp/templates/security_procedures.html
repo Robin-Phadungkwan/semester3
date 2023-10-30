@@ -4,19 +4,18 @@
 <!-- hieronder wordt de navigatiebalk weergegeven -->
 <footer class="security_procedures">
     <h1>Security Procedures</h1>
-    <h2>Secret Manager is een webapplicatie die is ontwikkeld om geheimen te beheren.</h2>
     <h2>Hieronder een paar procedures die zijn genomen om deze app te beveiligen.</h2>
     <h3>SQL Injections</h3>
-    <p>Status: <span class="status">prevented</span></p>
+    <p>Status: <span class="status">Prevented</span></p>
     <p>In de SQL-functies wordt een placeholder geplaatst die later wordt ingevuld via de invulformulieren. Hierdoor kan een SQL-injectie niet gebeuren, omdat de SQL een waarde verwacht die afkomstig is van een andere functie in de lijst. Zie het als een soort slot met zeer goede slagpinnen.</p>
     <p>hashen wordt gebruikt om de data op te slaan, het wordt het meest gebruikt bij de userpagina en login/user pagina</p>
     <h3>Hashing</h3>
-    <p>Status: <span class="status">hashed</span></p>
+    <p>Status: <span class="status">Hashed</span></p>
     <p>De wachtwoorden worden gehasht en vergeleken met de hash in de database. Als de hash overeenkomt met de hash in de database, mag de gebruiker inloggen.
        Het hashen wordt gebruikt bij het opslaan van de wachtwoorden in de database. Het hashen wordt gedaan met een salt, zodat het hashen niet snel te kraken is.</p>
     </p>
     <h3>Session</h3>
-    <p>Status: <span class="status">locked</span></p>
+    <p>Status: <span class="status">Locked</span></p>
     <p>De data wordt beschermd door een sessie, want de data wordt alleen getoond als er een gebruiker is ingelogd.
        Session worden gebruikt door de hele website heen maar het word het meeste gebruikt bij de user pagina. de username wordt gebruikt om te kijken of de user een secret heeft gemaakt en alleen die geheimen worden getoond.
        Session worden gebruikt om kwaadwillende mensen die data willen stelen tegen te houden.
