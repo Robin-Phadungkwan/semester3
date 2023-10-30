@@ -11,7 +11,7 @@ Om de kwaliteitsnormen te handhaven, heb ik me strikt gehouden aan de code-conve
 ## Wat zijn de beveiliginsnormen?
 
 - Worden de SQL-injections voorkomen?
-- Is de data in database encrypted
+- Is de data in database encrypted?
 
 ## Hoe is daarvoor gezorgd?
 
@@ -21,13 +21,23 @@ De manier hoe er is verzorgt dat de code aan de code conventions voldoet is via 
 
 ### Voldoet het aan de normen van de learning stories security 1,2 en 3?
 
-Daarnaast is er verzorgt dat de webiste en code aan de normen van de learning stories voldoet. Dat is gedaan door pentesten uit te voeren en daarop de code te verbeteren.
+Er is verzorgt dat de website en code aan de normen van de learning stories voldoet. Dat is gedaan door pentesten uit te voeren en daarop de code te verbeteren.
 
 ### Ziet de website er goed uit en hoe?
 
 De website ziet er goed uit door de feedback van expert reviews van de afgelopen sprints en de feedback van medestudenten over te nemen om de website er goed uit te laten zien.
 
+### Worden de SQL-injections voorkomen?
+
+SQL-injections worden voorkomen, doordat de sql statement die is aangemaakt een placeholder heeft waardoor de data dat wordt ingevoerd als plain text wordt gezien.
+
+### Is de data in database encrypted?
+
+De data is encrypted door via werkzeug de data die in de database komt om te zetten in hash.
+
 ## hoe blijf ik dit verzorgen in toekomstige user stories?
 
 De manier hoe dit in de toekomt blijft worden verzorgd is door de vraag te stellen aan mijzelf: "Hoe zou een hacker hierin binnenkomen en hoe kan ik de tegengaan?"
 en daar een oplossing op te bedenken.
+
+
