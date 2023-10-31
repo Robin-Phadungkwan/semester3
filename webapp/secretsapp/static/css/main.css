@@ -260,7 +260,7 @@ p.copyright{
     text-align: center;
 }
 /* hier het zelfde maar dan voor handheld modus*/
-@media all and (max-width: 480px) {
+@media all and (max-width: 768px) {
     .flexbox-container{
         flex-direction: column;
         background-color:  #009a22;
@@ -275,6 +275,24 @@ p.copyright{
         border: 2px solid  #009a22;
         background-color:  #009a22;  
         border-bottom: 2px solid black;
+    }
+    .center{
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid black;
+        height: auto;
+        text-align: center;
+    }
+    .info, .name_info{
+        width: 10%;
+        text-align: center;
+    }
+    .delete, .update, .share, .delete_header, .update_header, .share_header{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
     }
 }
     
